@@ -5,6 +5,6 @@ export const metadata: Metadata = {
   title: "Business Admin Dashboard",
 };
 
-export default function Home() {
+export default function BusinessAdmin() {
   return <BusinessAdminDashboard />;
 }
