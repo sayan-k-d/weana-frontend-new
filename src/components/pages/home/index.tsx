@@ -1,3 +1,19 @@
+"use client";
+
+import { useState } from "react";
+import { Box, Button, Paper, Stack, Typography } from "@mui/material";
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+
+import Sidebar from "@/components/layout/Sidebar";
+import WelcomeDialog from "./sections/WelcomeDialog";
+import OnboardingBanner from "./sections/OnboardingBanner";
+import TeamPerformanceCard from "./sections/TeamPerformanceCard";
+import CampaignsCard from "./sections/CampaignsCard";
+import RecommendationsCard from "./sections/RecommendationsCard";
+import RecentLeadsCard from "./sections/LeadsSection";
+import { ExpertCard, FeatureExplorer } from "./sections/FeaturesSection";
+import { useWelcomeDialog } from "@/hooks/useWelcomeDialog";
+
 export default function HomePage() {
   const { isOpen: isWelcomeOpen, close: closeWelcome } = useWelcomeDialog(true);
   const [showBanner, setShowBanner] = useState(true);
@@ -10,6 +26,8 @@ export default function HomePage() {
         fontFamily: 'Inter, "Segoe UI", sans-serif',
       }}
     >
+      {/* ── Welcome onboarding dialog ── */}
+      <WelcomeDialog open={isWelcomeOpen} onClose={closeWelcome} />
       {/* ── Main content ── */}
       <Box sx={{ flex: 1, p: 2.2, overflow: "auto" }}>
         {/* Breadcrumb + action */}
