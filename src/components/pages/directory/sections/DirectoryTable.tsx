@@ -5,26 +5,15 @@ import {
 } from "@tanstack/react-table";
 
 import { Box, Typography } from "@mui/material";
-import { columns } from "../constants/memberColumns";
-import { Member } from "@/types";
+import { columns } from "../constants/directoryColumns";
+import { Directory, Member } from "@/types";
 import React, { useMemo } from "react";
 
-export default function MembersTable({
-  data,
-  selected,
-  setSelected,
-}: {
-  data: Member[];
-  selected: number[];
-  setSelected: React.Dispatch<React.SetStateAction<number[]>>;
-}) {
-  const memberColumns = useMemo(
-    () => columns(selected, setSelected, data),
-    [selected, data],
-  );
+export default function DirectoryTable({ data }: { data: Directory[] }) {
+  const directoryColumns = columns;
   const table = useReactTable({
     data,
-    columns: memberColumns,
+    columns: directoryColumns,
     getCoreRowModel: getCoreRowModel(),
   });
 
@@ -35,11 +24,15 @@ export default function MembersTable({
         sx={{
           display: "grid",
           alignItems: "center",
-          gridTemplateColumns: "44px 1fr 1fr 1fr 1fr 1fr",
+          gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr",
           px: 2,
           py: 1,
           background: "#FAFAFA",
           borderBottom: "1px solid #eee",
+          color: "#858585",
+          "& > :not(:first-of-type)": {
+            textAlign: "center",
+          },
         }}
       >
         {table.getHeaderGroups().map((headerGroup) =>
@@ -57,10 +50,13 @@ export default function MembersTable({
           key={row.id}
           sx={{
             display: "grid",
-            gridTemplateColumns: "44px 1fr 1fr 1fr 1fr 1fr",
+            gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr",
             px: 2,
             py: 1.5,
             borderBottom: "1px solid #F3F4F6",
+            "& > :not(:first-of-type)": {
+              textAlign: "center",
+            },
           }}
         >
           {row.getVisibleCells().map((cell) => (

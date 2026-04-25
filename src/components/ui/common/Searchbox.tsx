@@ -7,14 +7,16 @@ import CloseIcon from "@mui/icons-material/Close";
 export default function SearchBox({
   search,
   setSearch,
+  placeholderText = "Search",
 }: {
   search: string;
   setSearch: (value: string) => void;
+  placeholderText?: string;
 }) {
   return (
     <TextField
       fullWidth
-      placeholder="Search by name, job, title or email"
+      placeholder={placeholderText}
       value={search}
       onChange={(e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
       size="small"
