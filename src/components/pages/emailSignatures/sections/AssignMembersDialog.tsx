@@ -16,6 +16,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Exo_2 } from "next/font/google";
 
 type MemberItem = {
   id: number;
@@ -67,13 +68,18 @@ function MemberRow({ member }: { member: MemberItem }) {
         <Typography sx={{ fontSize: 13.2, color: "#1D1928", fontWeight: 500 }}>
           {member.name}
         </Typography>
-        <Typography sx={{ fontSize: 12, color: "#7B748B" }}>{member.email}</Typography>
+        <Typography sx={{ fontSize: 12, color: "#7B748B" }}>
+          {member.email}
+        </Typography>
       </Box>
     </Stack>
   );
 }
 
-export default function AssignMembersDialog({ open, onClose }: AssignMembersDialogProps) {
+export default function AssignMembersDialog({
+  open,
+  onClose,
+}: AssignMembersDialogProps) {
   return (
     <Dialog
       open={open}
@@ -96,8 +102,18 @@ export default function AssignMembersDialog({ open, onClose }: AssignMembersDial
       }}
     >
       <Box sx={{ px: 3.4, pt: 2.4, pb: 1.2, bgcolor: "#FFFFFF" }}>
-        <Stack direction="row" sx={{ alignItems: "center", justifyContent: "space-between" }}>
-          <Typography sx={{ fontSize: 26, fontWeight: 700, color: "#241B33", lineHeight: 1.1 }}>
+        <Stack
+          direction="row"
+          sx={{ alignItems: "center", justifyContent: "space-between" }}
+        >
+          <Typography
+            sx={{
+              fontSize: 26,
+              fontWeight: 700,
+              color: "#241B33",
+              lineHeight: 1.1,
+            }}
+          >
             Assign Members to Test
           </Typography>
           <IconButton onClick={onClose} sx={{ color: "#9E98AC" }}>
@@ -105,11 +121,16 @@ export default function AssignMembersDialog({ open, onClose }: AssignMembersDial
           </IconButton>
         </Stack>
 
-        <Stack direction="row" spacing={1.3} sx={{ mt: 1.7, mb: 1.8 }}>
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{ mt: 1.7, mb: 1.8, alignItems: "center" }}
+        >
+          {/* INPUT */}
           <TextField
             size="small"
-            fullWidth
             placeholder="Search"
+            fullWidth
             slotProps={{
               input: {
                 startAdornment: (
@@ -120,6 +141,7 @@ export default function AssignMembersDialog({ open, onClose }: AssignMembersDial
               },
             }}
             sx={{
+              flex: 1, // 👈 important
               "& .MuiOutlinedInput-root": {
                 borderRadius: 8,
                 height: 42,
@@ -130,18 +152,22 @@ export default function AssignMembersDialog({ open, onClose }: AssignMembersDial
             }}
           />
 
+          {/* BUTTON */}
           <Button
             variant="outlined"
             endIcon={<FilterListOutlinedIcon sx={{ fontSize: 16 }} />}
             sx={{
+              flexShrink: 0, // 👈 prevents shrinking
+              whiteSpace: "nowrap", // 👈 fix wrap
               textTransform: "none",
               borderRadius: 100,
-              borderColor: "#D9D4E4",
-              color: "#2E253C",
+              borderColor: "#D8D5DF",
+              color: "#2E153F",
               px: 2,
+              py: 0.7,
               fontSize: 13,
               fontWeight: 600,
-              whiteSpace: "nowrap",
+              "&:hover": { borderColor: "#BDB8CA", bgcolor: "#F9F9FC" },
             }}
           >
             Filter by Subteam
@@ -152,14 +178,26 @@ export default function AssignMembersDialog({ open, onClose }: AssignMembersDial
           <Box>
             <Stack
               direction="row"
-              sx={{ alignItems: "center", justifyContent: "space-between", mb: 0.8 }}
+              sx={{
+                alignItems: "center",
+                justifyContent: "space-between",
+                mb: 0.8,
+              }}
             >
-              <Typography sx={{ fontSize: 14, color: "#2A2337", fontWeight: 600 }}>
+              <Typography
+                sx={{ fontSize: 14, color: "#2A2337", fontWeight: 600 }}
+              >
                 Assigned ({assignedMembers.length})
               </Typography>
-              <Stack direction="row" spacing={0.6} sx={{ alignItems: "center" }}>
+              <Stack
+                direction="row"
+                spacing={0.6}
+                sx={{ alignItems: "center" }}
+              >
                 <Checkbox size="small" sx={{ p: 0 }} />
-                <Typography sx={{ fontSize: 12.5, color: "#2F273D", fontWeight: 500 }}>
+                <Typography
+                  sx={{ fontSize: 12.5, color: "#2F273D", fontWeight: 500 }}
+                >
                   Select All
                 </Typography>
               </Stack>
@@ -173,14 +211,26 @@ export default function AssignMembersDialog({ open, onClose }: AssignMembersDial
           <Box>
             <Stack
               direction="row"
-              sx={{ alignItems: "center", justifyContent: "space-between", mb: 0.8 }}
+              sx={{
+                alignItems: "center",
+                justifyContent: "space-between",
+                mb: 0.8,
+              }}
             >
-              <Typography sx={{ fontSize: 14, color: "#2A2337", fontWeight: 600 }}>
+              <Typography
+                sx={{ fontSize: 14, color: "#2A2337", fontWeight: 600 }}
+              >
                 Unassigned ({unassignedMembers.length})
               </Typography>
-              <Stack direction="row" spacing={0.6} sx={{ alignItems: "center" }}>
+              <Stack
+                direction="row"
+                spacing={0.6}
+                sx={{ alignItems: "center" }}
+              >
                 <Checkbox size="small" sx={{ p: 0 }} />
-                <Typography sx={{ fontSize: 12.5, color: "#2F273D", fontWeight: 500 }}>
+                <Typography
+                  sx={{ fontSize: 12.5, color: "#2F273D", fontWeight: 500 }}
+                >
                   Select All
                 </Typography>
               </Stack>
@@ -196,9 +246,17 @@ export default function AssignMembersDialog({ open, onClose }: AssignMembersDial
 
         <Stack
           direction="row"
-          sx={{ alignItems: "center", justifyContent: "space-between", pb: 2.1 }}
+          sx={{
+            alignItems: "center",
+            justifyContent: "space-between",
+            pb: 2.1,
+          }}
         >
-          <Stack direction="row" spacing={1} sx={{ alignItems: "flex-start" }}>
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{ alignItems: "center", gap: 1.5 }}
+          >
             <Checkbox
               size="small"
               defaultChecked
@@ -210,7 +268,9 @@ export default function AssignMembersDialog({ open, onClose }: AssignMembersDial
               }}
             />
             <Box>
-              <Typography sx={{ fontSize: 14, color: "#1E1A28", fontWeight: 600 }}>
+              <Typography
+                sx={{ fontSize: 14, color: "#1E1A28", fontWeight: 600 }}
+              >
                 Create team cohesion
               </Typography>
               <Typography sx={{ fontSize: 13, color: "#7E7890" }}>

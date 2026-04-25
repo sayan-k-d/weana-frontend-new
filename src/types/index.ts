@@ -151,3 +151,14 @@ export interface AddTeamFormData {
   teamName: string;
   description: string;
 }
+
+// ─── Email Signature Screen Types ─────────────────────────────────────────────────────
+
+export type ToggleKey =
+  | "name"
+  | "pronouns"
+  | "jobTitle"
+  | "companyName"
+  | "jobTitle2"
+  | "companyName2"
+  | "profilePic";
