@@ -5,16 +5,16 @@ import {
 } from "@tanstack/react-table";
 
 import { Box, Typography } from "@mui/material";
-import { columns } from "../constants/memberColumns";
-import { Member } from "@/types";
+import { columns } from "../constants/teamColumns";
+import { Member, Team } from "@/types";
 import React, { useMemo } from "react";
 
-export default function MembersTable({
+export default function TeamsTable({
   data,
   selected,
   setSelected,
 }: {
-  data: Member[];
+  data: Team[];
   selected: number[];
   setSelected: React.Dispatch<React.SetStateAction<number[]>>;
 }) {
@@ -35,7 +35,7 @@ export default function MembersTable({
         sx={{
           display: "grid",
           alignItems: "center",
-          gridTemplateColumns: "44px 1fr 1fr 1fr 1fr 1fr",
+          gridTemplateColumns: "44px 1fr 1fr 1fr",
           px: 2,
           py: 1,
           background: "#FAFAFA",
@@ -44,7 +44,10 @@ export default function MembersTable({
       >
         {table.getHeaderGroups().map((headerGroup) =>
           headerGroup.headers.map((header) => (
-            <Typography key={header.id} sx={{ fontWeight: 600 }}>
+            <Typography
+              key={header.id}
+              sx={{ fontWeight: 600, color: "#6B7280" }}
+            >
               {flexRender(header.column.columnDef.header, header.getContext())}
             </Typography>
           )),
@@ -57,7 +60,7 @@ export default function MembersTable({
           key={row.id}
           sx={{
             display: "grid",
-            gridTemplateColumns: "44px 1fr 1fr 1fr 1fr 1fr",
+            gridTemplateColumns: "44px 1fr 1fr 1fr",
             px: 2,
             py: 1.5,
             borderBottom: "1px solid #F3F4F6",

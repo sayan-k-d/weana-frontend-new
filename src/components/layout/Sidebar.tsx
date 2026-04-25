@@ -73,7 +73,7 @@ export default function Sidebar() {
   const toggleSection = (title: string) =>
     setOpenSections((prev) => ({ ...prev, [title]: !prev[title] }));
 
-  const isItemActive = (path: string) => pathname === path;
+  const isItemActive = (path: string) => pathname.startsWith(path);
 
   return (
     <Box
