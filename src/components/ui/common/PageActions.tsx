@@ -5,17 +5,26 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import GridViewIcon from "@mui/icons-material/GridView";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { ViewMode } from "@/types";
+import { useRouter } from "next/navigation";
 
 export default function PageActions({
   view,
   onViewChange,
+  routePath,
+  buttonText,
+  setOpen,
 }: {
   view: string;
   onViewChange: (
     _: React.MouseEvent<HTMLElement>,
     newView: ViewMode | null,
   ) => void;
+  routePath?: string;
+  buttonText: string;
+  setOpen?: (isOpen: boolean) => void;
 }) {
+  const router = useRouter();
+
   return (
     <Box
       sx={{
@@ -110,6 +119,7 @@ export default function PageActions({
       <Button
         variant="contained"
         endIcon={<ChevronRightRoundedIcon />}
+        onClick={() => (routePath ? router.push(routePath) : setOpen?.(true))}
         sx={{
           textTransform: "none",
           bgcolor: "#6750A4",
@@ -122,7 +132,7 @@ export default function PageActions({
           ml: 0.5,
         }}
       >
-        Add Members
+        {buttonText}
       </Button>
     </Box>
   );

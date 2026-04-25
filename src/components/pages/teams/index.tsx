@@ -1,47 +1,30 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
-import {
-  Box,
-  Button,
-  Grid,
-  IconButton,
-  InputAdornment,
-  Paper,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { useRouter } from "next/navigation";
-
-import AddIcon from "@mui/icons-material/Add";
-
-import Sidebar from "@/components/layout/Sidebar";
-import { Member, ViewMode } from "@/types";
 import PageActions from "@/components/ui/common/PageActions";
-import { initialMembers } from "@/lib/constants";
 import SearchBox from "@/components/ui/common/Searchbox";
-import OnboardingBanner from "./sections/OnBoardingBanner";
-import MembersTable from "./sections/MembersTable";
-import MemberCard from "./sections/MembersCard";
-import AddMembersPage from "./sections/AddMembers";
+import { Box, Button, Grid, Paper, Stack, Typography } from "@mui/material";
+import OnboardingBanner from "../home/sections/OnboardingBanner";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Team, ViewMode } from "@/types";
+import { initialTeams } from "@/lib/constants";
+import TeamsTable from "./sections/TeamsTable";
+import TeamsCard from "./sections/TeamsCard";
+import { AddTeamDialog } from "./sections/AddTeamDialog";
 
-export default function MembersPage() {
-  const [members, setMembers] = useState<Member[]>(initialMembers);
+export default function TeamsPage() {
+  const [teams, setTeams] = useState<Team[]>(initialTeams);
   const [selected, setSelected] = useState<number[]>([]);
   const [search, setSearch] = useState<string>("");
   const [view, setView] = useState<ViewMode>("list");
-  const [showBanner, setShowBanner] = useState<boolean>(true);
+  const [open, setOpen] = useState(false);
 
   const router = useRouter();
 
   // ── Derived state ──────────────────────────────────────────────────────────
 
-  const filtered: Member[] = members.filter(
-    (m) =>
-      m.name.toLowerCase().includes(search.toLowerCase()) ||
-      m.email.toLowerCase().includes(search.toLowerCase()) ||
-      m.template.toLowerCase().includes(search.toLowerCase()),
+  const filtered: Team[] = teams.filter((t) =>
+    t.department.name.toLowerCase().includes(search.toLowerCase()),
   );
 
   // ── Handlers ───────────────────────────────────────────────────────────────
@@ -85,28 +68,29 @@ export default function MembersPage() {
               letterSpacing: "-0.01em",
             }}
           >
-            Members {`(${members.length})`}
+            Teams {`(${teams.length})`}
           </Typography>
         </Stack>
         {/* ── Page Actions ── */}
         <PageActions
           view={view}
           onViewChange={handleViewChange}
-          routePath="/members/add-member"
-          buttonText="Add Members"
+          setOpen={setOpen}
+          buttonText="Add Team"
         />
       </Stack>
+      {/* ── Add Team Dialog ── */}
+      <AddTeamDialog
+        open={open}
+        onClose={() => setOpen(false)}
+        onSubmit={(data) => console.log(data)}
+      />
       {/* ── Search ── */}
       <SearchBox
         search={search}
         setSearch={setSearch}
         placeholderText="Search by name, job, title or email"
       />
-
-      {/* ── Onboarding Banner ── */}
-      {showBanner && (
-        <OnboardingBanner onDismiss={() => setShowBanner(false)} />
-      )}
 
       {/* ── Members Table ── */}
       <Paper
@@ -118,49 +102,20 @@ export default function MembersPage() {
         }}
       >
         {view === "list" ? (
-          <MembersTable
+          <TeamsTable
             data={filtered}
             selected={selected}
             setSelected={setSelected}
           />
         ) : (
           <Grid container spacing={2} sx={{ p: 3 }}>
-            {filtered.map((member) => (
-              <Grid sx={{ xs: 12, md: 4 }} key={member.id}>
-                <MemberCard member={member} />
+            {filtered.map((team) => (
+              <Grid sx={{ xs: 12, md: 4 }} key={team.id}>
+                <TeamsCard team={team} />
               </Grid>
             ))}
           </Grid>
         )}
-
-        {/* Add Members Footer */}
-        <Box
-          sx={{
-            py: 2,
-            textAlign: "center",
-            borderTop: "1px solid #F3F4F6",
-          }}
-        >
-          <Button
-            variant="text"
-            startIcon={<AddIcon sx={{ fontSize: 16 }} />}
-            onClick={() => router.push("/members/add-member")}
-            sx={{
-              color: "#6B7280",
-              fontSize: 13.5,
-              fontWeight: 500,
-              "&:hover": { color: "#6B3FA0", background: "#F5F3FF" },
-              textTransform: "none",
-              borderRadius: 50,
-              px: 3.8,
-              py: 0.75,
-              boxShadow: "none",
-              ml: 0.5,
-            }}
-          >
-            Add Members
-          </Button>
-        </Box>
       </Paper>
 
       {/* ── Selection Bar ── */}
@@ -178,7 +133,7 @@ export default function MembersPage() {
           }}
         >
           <Typography sx={{ fontSize: 13, fontWeight: 600, color: "#6B3FA0" }}>
-            {selected.length} member{selected.length > 1 ? "s" : ""} selected
+            {selected.length} team{selected.length > 1 ? "s" : ""} selected
           </Typography>
           <Button
             size="small"

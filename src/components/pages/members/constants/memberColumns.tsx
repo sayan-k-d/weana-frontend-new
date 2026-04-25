@@ -1,5 +1,13 @@
-import { Avatar, Box, Checkbox, Chip, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Checkbox,
+  Chip,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { ColumnDef } from "@tanstack/react-table";
 import { Member } from "@/types";
 
@@ -73,9 +81,37 @@ export const columns = (
   },
 
   {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ getValue }) => (
+      <Chip
+        sx={{
+          backgroundColor:
+            getValue() === "Activated"
+              ? "#EAFFE5"
+              : getValue() === "Pending"
+                ? "#BB7DFF30"
+                : "#FF000021",
+          color: "#6B3FA0",
+          fontWeight: 600,
+          p: 2,
+        }}
+        label={getValue() as string}
+        size="small"
+      />
+    ),
+  },
+
+  {
     accessorKey: "template",
     header: "Template",
-    cell: ({ getValue }) => <Chip label={getValue() as string} size="small" />,
+    cell: ({ getValue }) => (
+      <Chip
+        sx={{ p: 2, borderRadius: 50 }}
+        label={getValue() as string}
+        size="small"
+      />
+    ),
   },
 
   {
@@ -85,48 +121,71 @@ export const columns = (
       const m = row.original;
 
       return (
-        m.teamColors.length > 0 && (
-          <Box
-            sx={{
-              borderRadius: 50,
-              border: "1px solid #C5C5C5",
-              p: 0.75,
-              maxHeight: 25,
-              maxWidth: 70,
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Box sx={{ flex: 1, display: "flex" }}>
-              {m.teamColors.map((c, i) => (
-                <Box
-                  key={i}
-                  sx={{
-                    width: 15,
-                    height: 15,
-                    borderRadius: 50,
-                    background: c,
-                    textAlign: "center",
-                    lineHeight: "15px",
-                  }}
-                >
-                  <Typography sx={{ color: "white", fontSize: 8 }}>
-                    {m.name.charAt(0) + m.name.charAt(1)}
-                  </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          {/* LEFT SIDE */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1.2 }}>
+            {m.teamColors.length > 0 && (
+              <Box
+                sx={{
+                  borderRadius: 50,
+                  border: "1px solid #C5C5C5",
+                  px: 0.75,
+                  py: 0.5,
+                  display: "flex",
+                  alignItems: "center",
+                  maxWidth: 90,
+                }}
+              >
+                <Box sx={{ display: "flex" }}>
+                  {m.teamColors.map((c, i) => (
+                    <Box
+                      key={i}
+                      sx={{
+                        width: 18,
+                        height: 18,
+                        borderRadius: "50%",
+                        background: c,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        ml: i === 0 ? 0 : -0.8, // 👈 overlap effect
+                        border: "2px solid white",
+                      }}
+                    >
+                      <Typography sx={{ color: "#fff", fontSize: 8 }}>
+                        {m.name.slice(0, 2).toUpperCase()}
+                      </Typography>
+                    </Box>
+                  ))}
                 </Box>
-              ))}
-            </Box>
-            <AddIcon
-              sx={{
-                fontSize: 16,
-                width: 15,
-                height: 15,
-                backgroundColor: "#CFCFCF",
-                borderRadius: "50%",
-              }}
-            />
+
+                <AddIcon
+                  sx={{
+                    fontSize: 14,
+                    ml: 0.5,
+                    width: 18,
+                    height: 18,
+                    backgroundColor: "#CFCFCF",
+                    borderRadius: "50%",
+                    p: 0.3,
+                  }}
+                />
+              </Box>
+            )}
           </Box>
-        )
+
+          {/* RIGHT SIDE (ALWAYS PRESENT) */}
+          <IconButton size="small">
+            <MoreVertIcon />
+          </IconButton>
+        </Box>
       );
     },
   },
