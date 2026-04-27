@@ -499,7 +499,7 @@ const BusinessCardPreview = ({ name, title, location, showLock = false }: {
           <Typography sx={{ fontSize: 9, color: 'rgba(255,255,255,0.6)' }}>{location}</Typography>
         </Box>
       </Box>
-      <Stack spacing={0.6} mt={1.5}>
+      <Stack spacing={0.6} sx={{ mt: 1.5 }}>
         {[PhoneOutlinedIcon, EmailOutlinedIcon, LanguageOutlinedIcon].map((Icon, i) => (
           <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Box sx={{ width: 16, height: 16, borderRadius: '50%', background: 'rgba(255,255,255,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
