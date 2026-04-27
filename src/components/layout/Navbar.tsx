@@ -41,7 +41,7 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
                     }}
                 >
                     {/* Logo */}
-                    <Link href="/home" passHref>
+                    <Link href="/" passHref>
                         <Box component="a" sx={{ display: 'inline-flex', alignItems: 'center' }}>
                             <Image src="/images/logo.png" alt="logo" width={100} height={20} priority />
                         </Box>
