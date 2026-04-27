@@ -19,7 +19,7 @@ const C = {
 };
 
 export default function Navbar({ isHome = false }: { isHome?: boolean }) {
-    const links = ['our apps', 'features', 'pricing', 'help'];
+    const links = ['features', 'products', 'resources', 'pricing'];
     return (
         <Box
             component="nav"
@@ -35,7 +35,7 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
                 // borderBottom: `1px solid ${C.border}`,
             }}
         >
-            <Container maxWidth="xl">
+            <Container maxWidth="lg">
                 {/* <Stack direction="row" alignItems="center" justifyContent="space-between" py={1.5}> */}
                 <Stack
                     direction="row"
