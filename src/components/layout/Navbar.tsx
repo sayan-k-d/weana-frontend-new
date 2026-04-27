@@ -59,7 +59,7 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
                     >
                         {links.map((l) => (
                             // <Link key={l} href={`/${l.toLowerCase()}`} style={{ textDecoration: 'none' }}>
-                            <Typography key={l} component={Link} href={`/${l.toLowerCase()}`} sx={{ fontSize: 13.5, color: isHome ? '#F7F7F7' : "#1E1E1E", fontWeight: 500, textDecoration: 'none', textTransform: "capitalize", transition: 'transform 320ms ease, color 320ms ease', '&:hover': { color: C.navy, transform: 'translateY(-2px)' } }}>
+                            <Typography key={l} component={Link} href={`/${l.toLowerCase()}`} sx={{ fontSize: 13.5, color: '#555', fontWeight: 500, textDecoration: 'none', textTransform: "capitalize", transition: 'transform 320ms ease, color 320ms ease', '&:hover': { color: C.navy, transform: 'translateY(-2px)' } }}>
                                 {l}
                             </Typography>
                             // </Link>
@@ -72,11 +72,11 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
                             alignItems: "center",
                         }}
                     >
-                        <Typography component={Link} href={`/login`} sx={{ fontSize: 13.5, color: isHome ? '#F7F7F7' : "#1E1E1E", fontWeight: 500, textDecoration: 'none', textTransform: "capitalize", transition: 'transform 320ms ease, color 320ms ease', '&:hover': { color: C.navy, transform: 'translateY(-2px)' } }}>
-                            Login
-                        </Typography>
+                        <Box sx={{ width: 34, height: 34, borderRadius: '50%', border: `1.5px solid ${C.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'transform 320ms ease, border-color 320ms ease', '&:hover': { borderColor: C.purple, transform: 'translateY(-2px)' } }}>
+                            <ShoppingCartOutlinedIcon sx={{ fontSize: 17, color: '#555' }} />
+                        </Box>
                         <Button
-                            component={Link} href="/signup"
+                            component={Link} href="/login"
                             sx={{ background: C.coral, color: '#fff', borderRadius: 999, px: 3, py: 1.3, fontSize: 14, fontWeight: 600, textTransform: 'none', transition: 'transform 320ms ease, box-shadow 320ms ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 12px 22px rgba(123,73,177,0.35)' } }}
                         >
                             Get Started for Free
