@@ -28,7 +28,7 @@ export default function Footer() {
 
     return (
         <Box sx={{ background: '#000', py: 8 }}>
-            <Container maxWidth="xl">
+            <Container maxWidth="lg">
                 <Grid container spacing={6} sx={{ mb: 6 }}>
                     <Grid size={{ xs: 12, md: 3 }}>
                         <Image src="/images/logo_white.png" alt="logo" width={100} height={20} priority />
@@ -61,8 +61,8 @@ export default function Footer() {
                 <Box sx={{ borderTop: '1px solid rgba(255,255,255,0.1)', pt: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 2 }}>
                     <Typography sx={{ fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>© 2025 Weana. All rights reserved.</Typography>
                     <Stack direction="row" spacing={3}>
-                        {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((l) => (
-                            <Typography key={l} component={Link} href="#" sx={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', textDecoration: 'none', '&:hover': { color: '#fff' } }}>{l}</Typography>
+                        {[{ name: 'Privacy Policy', link: "/privacy-policy" }, { name: 'Terms of Service', link: "/terms-of-services" }, { name: 'Cookie Policy', link: "/cookie-policy" }].map((l) => (
+                            <Typography key={l.name} component={Link} href={l.link} sx={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', textDecoration: 'none', '&:hover': { color: '#fff' } }}>{l.name}</Typography>
                         ))}
                     </Stack>
                 </Box>
