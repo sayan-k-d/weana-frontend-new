@@ -6,11 +6,15 @@ import { whiteCardStyles } from "@/lib/utils";
 type WhiteCardProps = {
   children: ReactNode;
   sx?: SxProps<Theme>;
-} & PaperProps;
+} & Omit<PaperProps, "sx">;
 
 export default function WhiteCard({ children, sx, ...rest }: WhiteCardProps) {
   return (
-    <Paper elevation={0} sx={{ ...whiteCardStyles(), ...sx }} {...rest}>
+    <Paper
+      elevation={0}
+      sx={{ ...whiteCardStyles(), ...(sx as object) }}
+      {...rest}
+    >
       {children}
     </Paper>
   );

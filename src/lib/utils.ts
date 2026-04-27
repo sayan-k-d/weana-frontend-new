@@ -12,6 +12,15 @@ export function whiteCardStyles(overrides?: Record<string, unknown>) {
     ...overrides,
   };
 }
+// import { Theme } from "@mui/material/styles";
+// import { SystemStyleObject } from "@mui/system";
+
+// export const whiteCardStyles: SystemStyleObject<Theme> = {
+//   border: "1px solid #E7E6EE",
+//   borderRadius: "16px",
+//   boxShadow: "0 1px 2px rgba(23, 19, 33, 0.04)",
+//   bgcolor: "#FFFFFF",
+// };
 
 /**
  * Derives initials from a full name string.

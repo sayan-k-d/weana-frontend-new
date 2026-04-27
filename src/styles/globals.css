@@ -1,0 +1,23 @@
+/* Hide scrollbar but keep scroll functionality */
+
+/* Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* IE / old Edge */
+* {
+  -ms-overflow-style: none;
+}
+
+/* Prevent body double scroll (important for dashboard layout) */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}

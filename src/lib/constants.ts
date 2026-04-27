@@ -1,3 +1,4 @@
+import { Department } from "./../types/index";
 import React from "react";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined";
@@ -19,6 +20,8 @@ import type {
   TeamMetric,
   OnboardingStep,
   Member,
+  Directory,
+  Team,
 } from "@/types";
 
 // ─── Sidebar Navigation ───────────────────────────────────────────────────────
@@ -37,6 +40,7 @@ export const NAV_SECTIONS: NavSection[] = [
     }),
     items: [
       { label: "Members", path: "/members" },
+      { label: "Directory", path: "/directory" },
       { label: "Teams", path: "/teams" },
       { label: "Templates", path: "/templates" },
     ],
@@ -181,6 +185,7 @@ export const initialMembers: Member[] = [
     id: 1,
     name: "Diego",
     email: "diogel@gmail.com",
+    status: "Activated",
     template: "Designers G...",
     avatarUrl: "/images/mem1.jpg",
     teamColors: ["#6B3FA0", "#9B6DD0"],
@@ -190,6 +195,7 @@ export const initialMembers: Member[] = [
     id: 2,
     name: "Oleg",
     email: "oleg@gmail.com",
+    status: "Pending",
     template: "Haitham",
     avatarUrl: "/images/mem2.jpg",
     teamColors: ["#6B3FA0", "#9B6DD0"],
@@ -199,6 +205,7 @@ export const initialMembers: Member[] = [
     id: 3,
     name: "Aiony",
     email: "aiony@gmail.com",
+    status: "Activated",
     template: "Haitham",
     avatarUrl: "/images/mem3.jpg",
     teamColors: ["#6B3FA0"],
@@ -208,6 +215,7 @@ export const initialMembers: Member[] = [
     id: 4,
     name: "Vicky",
     email: "vicky@gmail.com",
+    status: "Deactivated",
     template: "Haitham",
     avatarUrl: "/images/mem4.jpg",
     teamColors: [],
@@ -215,4 +223,65 @@ export const initialMembers: Member[] = [
   },
 ];
 
-// Member Columns
+// ─── Directory Constants ────────────────────────────────────────────────────────────
+export const initialDirectories: Directory[] = [
+  {
+    id: 1,
+    name: "Alex Parker",
+    email: "alex.parker.work@gmail.com",
+    status: "Invited",
+    avatarUrl: "/images/mem1.jpg",
+    number_of_cards: 1,
+    role: "User",
+  },
+  {
+    id: 2,
+    name: "Morgan Lee",
+    email: "morgan.lee@gmail.com",
+    status: "Invited",
+    number_of_cards: 1,
+    role: "User",
+  },
+  {
+    id: 3,
+    name: "Jamie Quinn",
+    email: "jamie.quinn@gmail.com",
+    status: "Invited",
+    number_of_cards: 1,
+    role: "User",
+  },
+  {
+    id: 4,
+    name: "Avery Scott",
+    email: "avery.scott@gmail.com",
+    status: "Invited",
+    number_of_cards: 1,
+    role: "User",
+  },
+];
+
+// ─── Directory Constants ────────────────────────────────────────────────────────────
+export const initialTeams: Team[] = [
+  {
+    id: 1,
+    department: { id: 1, name: "Sales Department", color: "#512B7A" },
+    membersCount: 2,
+    teamColors: ["#6B3FA0", "#9B6DD0"],
+  },
+  {
+    id: 2,
+    department: { id: 2, name: "Designer Department", color: "#907BA8" },
+    teamColors: ["#6B3FA0", "#9B6DD0"],
+  },
+  {
+    id: 3,
+    department: { id: 3, name: "Operations Department", color: "#183E77" },
+    teamColors: ["#6B3FA0", "#9B6DD0"],
+  },
+  {
+    id: 4,
+    department: { id: 4, name: "IT Department", color: "#2A3473" },
+    membersCount: 1,
+    teamColors: ["#6B3FA0", "#9B6DD0"],
+  },
+];
