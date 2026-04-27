@@ -1,3 +1,5 @@
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 import TermsOfServicePage from "@/components/pages/termsOfServices";
 
 
@@ -7,5 +9,11 @@ export const metadata = {
 };
 
 export default function PrivacyPolicy() {
-  return <TermsOfServicePage />;
+  return (
+    <>
+      <Navbar />
+      <TermsOfServicePage />
+      <Footer />
+    </>
+  );
 }

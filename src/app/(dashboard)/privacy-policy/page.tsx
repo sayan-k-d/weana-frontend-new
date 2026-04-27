@@ -1,3 +1,5 @@
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 import PrivacyPolicyPage from "@/components/pages/privacyPolicy";
 
 
@@ -7,5 +9,11 @@ export const metadata = {
 };
 
 export default function PrivacyPolicy() {
-  return <PrivacyPolicyPage />;
+  return (
+    <>
+      <Navbar />
+      <PrivacyPolicyPage />
+      <Footer />
+    </>
+  );
 }

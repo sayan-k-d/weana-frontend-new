@@ -19,7 +19,7 @@ const C = {
 };
 
 export default function Navbar({ isHome = false }: { isHome?: boolean }) {
-    const links = ['our apps', 'features', 'pricing', 'help'];
+    const links = ['features', 'products', 'resources', 'pricing'];
     return (
         <Box
             component="nav"
