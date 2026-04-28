@@ -1,11 +1,5 @@
-// import { redirect } from "next/navigation";
-
-// export default function RootPage() {
-//   redirect("/home");
-// }
-
-import HomePage from "../components/pages/home";
+import BasePage from "@/components/pages/base-page";
 
 export default function Home() {
-  return <HomePage />;
+  return <BasePage />;
 }
