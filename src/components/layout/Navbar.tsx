@@ -25,8 +25,13 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
             component="nav"
             sx={{
                 position: 'sticky', top: isHome ? "20px" : "0px", zIndex: 100,
-                background: isHome ? "transparent" : "linear-gradient(360deg, #CEB7E7 0%, #F5ECFF 100%)",
-                backdropFilter: 'blur(12px)',
+                background: isHome ? 'transparent' : 'linear-gradient(360deg, #CEB7E7 0%, #F5ECFF 100%)',
+                backdropFilter: isHome ? 'none' : 'blur(12px)',
+                animation: 'navSlideDown 1.1s cubic-bezier(0.22, 1, 0.36, 1) both',
+                '@keyframes navSlideDown': {
+                    '0%': { opacity: 0, transform: 'translateY(-16px)' },
+                    '100%': { opacity: 1, transform: 'translateY(0)' },
+                },
                 // borderBottom: `1px solid ${C.border}`,
             }}
         >
@@ -41,11 +46,10 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
                     }}
                 >
                     {/* Logo */}
-                    <Link href="/" passHref>
-                        <Box component="a" sx={{ display: 'inline-flex', alignItems: 'center' }}>
-                            <Image src="/images/logo.png" alt="logo" width={100} height={20} priority />
-                        </Box>
-                    </Link>
+                    <Box component={Link} href="/home" sx={{ display: 'inline-flex', alignItems: 'center' }}>
+                        {isHome ? <Image src="/images/logo_white.png" alt="logo" width={100} height={20} priority /> :
+                            <Image src="/images/logo.png" alt="logo" width={100} height={20} priority />}
+                    </Box>
 
                     {/* Nav links */}
                     <Stack direction="row" spacing={3.5}
@@ -55,7 +59,7 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
                     >
                         {links.map((l) => (
                             // <Link key={l} href={`/${l.toLowerCase()}`} style={{ textDecoration: 'none' }}>
-                            <Typography component={Link} href={`/${l.toLowerCase()}`} sx={{ fontSize: 13.5, color: '#555', fontWeight: 500, textDecoration: 'none', textTransform: "capitalize", '&:hover': { color: C.navy } }}>
+                            <Typography key={l} component={Link} href={`/${l.toLowerCase()}`} sx={{ fontSize: 13.5, color: isHome ? '#F7F7F7' : "#1E1E1E", fontWeight: 500, textDecoration: 'none', textTransform: "capitalize", transition: 'transform 320ms ease, color 320ms ease', '&:hover': { color: C.navy, transform: 'translateY(-2px)' } }}>
                                 {l}
                             </Typography>
                             // </Link>
@@ -68,14 +72,14 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
                             alignItems: "center",
                         }}
                     >
-                        <Box sx={{ width: 34, height: 34, borderRadius: '50%', border: `1.5px solid ${C.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', '&:hover': { borderColor: C.purple } }}>
-                            <ShoppingCartOutlinedIcon sx={{ fontSize: 17, color: '#555' }} />
-                        </Box>
+                        <Typography component={Link} href={`/login`} sx={{ fontSize: 13.5, color: isHome ? '#F7F7F7' : "#1E1E1E", fontWeight: 500, textDecoration: 'none', textTransform: "capitalize", transition: 'transform 320ms ease, color 320ms ease', '&:hover': { color: C.navy, transform: 'translateY(-2px)' } }}>
+                            Login
+                        </Typography>
                         <Button
-                            component={Link} href="/login"
-                            sx={{ background: C.coral, color: '#fff', borderRadius: 999, px: 3, py: 1.3, fontSize: 14, fontWeight: 600, textTransform: 'none', }}
+                            component={Link} href="/signup"
+                            sx={{ background: C.coral, color: '#fff', borderRadius: 999, px: 3, py: 1.3, fontSize: 14, fontWeight: 600, textTransform: 'none', transition: 'transform 320ms ease, box-shadow 320ms ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 12px 22px rgba(123,73,177,0.35)' } }}
                         >
-                            Login / Register
+                            Get Started for Free
                         </Button>
                     </Stack>
                 </Stack>
