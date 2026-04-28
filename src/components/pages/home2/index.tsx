@@ -173,7 +173,7 @@ function Hero() {
 
       <Box sx={{ position: 'relative', zIndex: 2 }}>
         <Navbar isHome={true} />
-        <Container maxWidth="xl" sx={{ mt: { xs: 8, md: 16 }, pb: { xs: 10, md: 14 } }}>
+        <Container maxWidth="lg" sx={{ mt: { xs: 8, md: 16 }, pb: { xs: 10, md: 14 } }}>
           {!heroReady ? (
             <Box
               sx={{
@@ -386,23 +386,23 @@ function ChosenBy() {
             const rightNeighborTransform = `translate3d(-${swapX}px, ${card.translateY}, 0) rotate(${card.rotate}) scale(1)`;
 
             return (
-            <Box
-              key={card.id}
-              onMouseEnter={() => setActiveCardId(card.id)}
-              onMouseLeave={() => setActiveCardId(null)}
-              sx={{
-                transformOrigin: 'center center',
-                marginLeft: index === 0 ? 0 : { xs: '-126px', md: '-184px' },
-                transform: isHovered ? hoverTransform : isRightNeighbor ? rightNeighborTransform : baseTransform,
-                transition: 'transform 0.62s cubic-bezier(0.22, 1, 0.36, 1)',
-                zIndex: isHovered ? 99 : index,
-                willChange: 'transform',
-                backfaceVisibility: 'hidden',
-                cursor: 'pointer',
-              }}
-            >
-              <Box component="img" src={card.src} sx={{ width: { xs: 206, md: 350 }, height: 'auto', borderRadius: '24px' }} />
-            </Box>
+              <Box
+                key={card.id}
+                onMouseEnter={() => setActiveCardId(card.id)}
+                onMouseLeave={() => setActiveCardId(null)}
+                sx={{
+                  transformOrigin: 'center center',
+                  marginLeft: index === 0 ? 0 : { xs: '-126px', md: '-184px' },
+                  transform: isHovered ? hoverTransform : isRightNeighbor ? rightNeighborTransform : baseTransform,
+                  transition: 'transform 0.62s cubic-bezier(0.22, 1, 0.36, 1)',
+                  zIndex: isHovered ? 99 : index,
+                  willChange: 'transform',
+                  backfaceVisibility: 'hidden',
+                  cursor: 'pointer',
+                }}
+              >
+                <Box component="img" src={card.src} sx={{ width: { xs: 206, md: 350 }, height: 'auto', borderRadius: '24px' }} />
+              </Box>
             );
           })}
         </Box>
@@ -499,7 +499,7 @@ const BusinessCardPreview = ({ name, title, location, showLock = false }: {
           <Typography sx={{ fontSize: 9, color: 'rgba(255,255,255,0.6)' }}>{location}</Typography>
         </Box>
       </Box>
-      <Stack spacing={0.6} mt={1.5}>
+      <Stack spacing={0.6} sx={{ mt: 1.5 }}>
         {[PhoneOutlinedIcon, EmailOutlinedIcon, LanguageOutlinedIcon].map((Icon, i) => (
           <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Box sx={{ width: 16, height: 16, borderRadius: '50%', background: 'rgba(255,255,255,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>

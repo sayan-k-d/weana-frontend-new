@@ -23,7 +23,7 @@ export default function Footer() {
 
     return (
         <Box sx={{ background: '#1A1D22', pt: { xs: 6, md: 7 }, pb: 0 }}>
-            <Container maxWidth="xl">
+            <Container maxWidth="lg">
                 <Grid container spacing={{ xs: 4, md: 6 }} sx={{ mb: { xs: 4, md: 5 } }}>
                     <Grid size={{ xs: 12, md: 4 }}>
                         <Image src="/images/logo_white.png" alt="logo" width={170} height={42} priority />
@@ -73,6 +73,6 @@ export default function Footer() {
                     </Stack>
                 </Box>
             </Container>
-        </Box>
+        </Box >
     );
 }
