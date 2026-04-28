@@ -27,7 +27,9 @@ export default function Footer() {
             <Container maxWidth="lg">
                 <Grid container spacing={{ xs: 4, md: 6 }} sx={{ mb: { xs: 4, md: 5 } }}>
                     <Grid size={{ xs: 12, md: 4 }}>
-                        <Image src="/images/logo_white.png" alt="logo" width={183} height={35} priority />
+                        <Box component={Link} href="/" sx={{ display: 'inline-flex', alignItems: 'center' }}>
+                            <Image src="/images/logo_white.png" alt="logo" width={183} height={35} priority />
+                        </Box>
                         <Typography sx={{ mt: 4, fontSize: { xs: 15, md: 14 }, color: 'rgba(255,255,255,0.9)', lineHeight: 1.45, maxWidth: 310 }}>
                             We are committed to delivering quality products and seamless experiences for customers. Our focus is on simplicity, reliability, and continuous improvement to meet your everyday needs.
                         </Typography>

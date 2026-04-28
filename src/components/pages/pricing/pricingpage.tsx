@@ -11,11 +11,7 @@ import { styled } from '@mui/material/styles';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import SocialProof from '../features/carousel';
-// import Navbar from '../features/nav';
-// import Footer from '../features/footer';
-// import SocialProof from '../features/carousel';
+import SocialProof from '../base-page/section/carousel';
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
 const C = {

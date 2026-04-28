@@ -46,7 +46,7 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
                     }}
                 >
                     {/* Logo */}
-                    <Box component={Link} href="/home" sx={{ display: 'inline-flex', alignItems: 'center' }}>
+                    <Box component={Link} href="/" sx={{ display: 'inline-flex', alignItems: 'center' }}>
                         {isHome ? <Image src="/images/logo_white.png" alt="logo" width={100} height={20} priority /> :
                             <Image src="/images/logo.png" alt="logo" width={100} height={20} priority />}
                     </Box>

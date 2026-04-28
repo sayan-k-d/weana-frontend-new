@@ -20,9 +20,9 @@ import EventRepeatOutlinedIcon from '@mui/icons-material/EventRepeatOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import Navbar from '../features/nav';
-import Footer from '../features/footer';
-import SocialProof from '../features/carousel';
+import Footer from '@/components/layout/Footer';
+import SocialProof from './section/carousel';
+import Navbar from '@/components/layout/Navbar';
 
 const C = {
   bg: '#F0EEF8',
@@ -890,7 +890,7 @@ function SustainabilityCalculator() {
   );
 }
 
-export default function Home2Page() {
+export default function BasePage() {
   return (
     <Box sx={{ background: '#fff', height: '100vh', overflowX: 'hidden', overflowY: 'auto' }}>
       <Hero />
