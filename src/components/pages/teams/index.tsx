@@ -3,7 +3,7 @@
 import PageActions from "@/components/ui/common/PageActions";
 import SearchBox from "@/components/ui/common/Searchbox";
 import { Box, Button, Grid, Paper, Stack, Typography } from "@mui/material";
-import OnboardingBanner from "../home/sections/OnboardingBanner";
+import OnboardingBanner from "../businessAdminDashboard/sections/OnboardingBanner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Team, ViewMode } from "@/types";

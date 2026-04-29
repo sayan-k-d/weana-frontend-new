@@ -10,6 +10,7 @@ import AddIcon from "@mui/icons-material/Add";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { ColumnDef } from "@tanstack/react-table";
 import { Member } from "@/types";
+import Link from "next/link";
 
 export const columns = (
   selected: number[],
@@ -65,12 +66,24 @@ export const columns = (
       const m = row.original;
 
       return (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-          <Avatar src={m.avatarUrl} sx={{ width: 36, height: 36 }} />
-          <Typography sx={{ fontSize: 14, fontWeight: 600 }}>
-            {m.name}
-          </Typography>
-        </Box>
+        <Link
+          className="table-link"
+          href={`/members/${m.id}`}
+          style={{ textDecoration: "none", color: "#000000" }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1.5,
+            }}
+          >
+            <Avatar src={m.avatarUrl} sx={{ width: 36, height: 36 }} />
+            <Typography sx={{ fontSize: 14, fontWeight: 600 }}>
+              {m.name}
+            </Typography>
+          </Box>
+        </Link>
       );
     },
   },
