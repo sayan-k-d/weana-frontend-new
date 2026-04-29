@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect,useState } from "react";
+import { useEffect,useState,Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { log } from "console";
 
-export default function CallbackPage() {
+function CallbackPageContent() {
   const router = useRouter();
   const params = useSearchParams();
   const [status, setStatus] = useState("Processing login...");
@@ -72,4 +72,12 @@ export default function CallbackPage() {
     exchangeToken(decodedState);
   }, [params]);
   return <p>{status}</p>;
+}
+
+export default function CallbackPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CallbackPageContent />
+    </Suspense>
+  );
 }
