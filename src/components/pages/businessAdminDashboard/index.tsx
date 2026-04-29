@@ -14,7 +14,7 @@ import RecentLeadsCard from "./sections/LeadsSection";
 import { ExpertCard, FeatureExplorer } from "./sections/FeaturesSection";
 import { useWelcomeDialog } from "@/hooks/useWelcomeDialog";
 
-export default function HomePage() {
+export default function BusinessAdminDashboard() {
   const { isOpen: isWelcomeOpen, close: closeWelcome } = useWelcomeDialog(true);
   const [showBanner, setShowBanner] = useState(true);
 
