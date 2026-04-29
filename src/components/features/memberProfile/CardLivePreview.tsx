@@ -105,7 +105,7 @@ export function CardLivePreview({
         {/* Cover / header area */}
         <Box
           sx={{
-            height: 160,
+            height: 200,
             bgcolor: bgColor,
             position: "relative",
             display: "flex",
@@ -228,7 +228,7 @@ export function CardLivePreview({
                       label={field.label}
                       variant="outlined"
                       size="small"
-                      sx={{ fontSize: 9, color: "#9896A6", mb: 2 }}
+                      sx={{ fontSize: 9, color: "#9896A6", mb: 1 }}
                     />
                   </Box>
                 ))}

@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Box, Button, Paper, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 
-import Sidebar from "@/components/layout/Sidebar";
 import WelcomeDialog from "./sections/WelcomeDialog";
 import OnboardingBanner from "./sections/OnboardingBanner";
 import TeamPerformanceCard from "./sections/TeamPerformanceCard";
