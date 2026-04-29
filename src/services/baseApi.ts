@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { RootState } from "@/store";
+import { RegisterPayload } from "@/types";
 
 export const baseApi = createApi({
   reducerPath: "api",
@@ -15,3 +16,18 @@ export const baseApi = createApi({
   tagTypes: ["Card", "Lead", "Analytics", "User"],
   endpoints: () => ({}), // endpoints are injected per feature
 });
+
+export const authApi : any = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    register: builder.mutation<any, RegisterPayload>({
+      query: (body) => ({
+        url: "/auth/register",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["User"],
+    }),
+  }),
+});
+
+export const { useRegisterMutation } = authApi;

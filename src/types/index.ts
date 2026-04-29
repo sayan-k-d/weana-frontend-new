@@ -208,3 +208,29 @@ export type ToggleKey =
   | "jobTitle2"
   | "companyName2"
   | "profilePic";
+
+
+  export type FormState = {
+    type: string,
+    email: string;
+    password: string;
+  };
+  export type FormErrors = Partial<FormState>;
+  
+  export type RegisterPayload = {
+    type: string;
+    email: string;
+    password: string;
+  
+    name?: string;
+    job_title?: string;
+    company?: string;
+    additional_email?: string;
+    mobile?: string;
+  
+    recommended_links?: {
+      title: string;
+      value: string;
+      type: string;
+    }[];
+  };
