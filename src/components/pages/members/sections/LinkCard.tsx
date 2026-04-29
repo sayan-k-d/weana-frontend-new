@@ -5,12 +5,10 @@ import {
   Switch,
   Button,
   IconButton,
-  Grid,
   Paper,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 
 // --- Sub-Component: Recommended Link Card ---
@@ -64,7 +62,12 @@ export function LinkToolbar() {
     <Stack
       direction="row"
       spacing={2}
-      sx={{ mb: 4, alignItems: "center", justifyContent: "space-between" }}
+      sx={{
+        mb: 4,
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexWrap: "nowrap",
+      }}
     >
       <Stack
         direction="row"
@@ -78,16 +81,17 @@ export function LinkToolbar() {
           py: 0.5,
           bgcolor: "#FFFFFF",
           alignItems: "center",
+          flexShrink: 0,
         }}
       >
         <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
-          <Typography sx={{ fontSize: 13, color: "#6B6880" }}>
+          <Typography sx={{ fontSize: 13, color: "#6B6880", whiteSpace: "nowrap" }}>
             Contact Capture
           </Typography>
           <Switch size="small" />
         </Stack>
         <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
-          <Typography sx={{ fontSize: 13, color: "#6B6880" }}>
+          <Typography sx={{ fontSize: 13, color: "#6B6880", whiteSpace: "nowrap" }}>
             Single Link
           </Typography>
           <Switch size="small" />
@@ -108,6 +112,8 @@ export function LinkToolbar() {
           py: 1.2,
           fontSize: 14,
           fontWeight: 600,
+          whiteSpace: "nowrap",
+          flexShrink: 0,
           "&:hover": { bgcolor: "#563285" },
         }}
       >

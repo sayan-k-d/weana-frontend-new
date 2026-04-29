@@ -4,10 +4,10 @@ import AddIcon from "@mui/icons-material/Add";
 
 export function LinksSection() {
   const recommendedLinks = [
-    { title: "Email", icon: "/icons/email.png" },
-    { title: "Call", icon: "/icons/call.png" },
-    { title: "Website", icon: "/icons/website.png" },
-    { title: "LinkedIn", icon: "/icons/linkedin.png" },
+    { title: "Email", icon: "/images/email.png" },
+    { title: "Call", icon: "/images/call.png" },
+    { title: "Website", icon: "/images/website.png" },
+    { title: "LinkedIn", icon: "/images/linkedin.png" },
   ];
 
   return (

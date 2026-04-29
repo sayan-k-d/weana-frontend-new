@@ -16,6 +16,11 @@ import { DEFAULT_FORM } from "@/components/pages/members/constants/memberProfile
 // import { useSearchParams } from "next/navigation";
 import { initialMembers } from "@/lib/constants";
 import { LinksSection } from "./LinksSection";
+import {
+  DEFAULT_LEAD_CAPTURE_FORM,
+  LeadCaptureFormData,
+  LeadCaptureSection,
+} from "@/components/features/leadcapture";
 
 // ─── Placeholder panels for non-About sections ────────────────────────────────
 // Replace each with its own component when designed.
@@ -32,10 +37,14 @@ function ActivePanel({
   id,
   form,
   onChange,
+  onLeadCaptureChange,
+  leadCaptureForm,
 }: {
   id: SideMenuItemId;
   form: MemberProfileFormData;
   onChange: (p: Partial<MemberProfileFormData>) => void;
+  leadCaptureForm: LeadCaptureFormData;
+  onLeadCaptureChange: (p: Partial<LeadCaptureFormData>) => void;
 }) {
   switch (id) {
     case "about":
@@ -43,7 +52,13 @@ function ActivePanel({
     case "links":
       return <LinksSection />;
     case "lead-capture-form":
-      return <PlaceholderPanel label="Lead Capture Form" />;
+      return (
+        <LeadCaptureSection
+          key={leadCaptureForm.header || "reset-key"}
+          form={leadCaptureForm}
+          onChange={onLeadCaptureChange}
+        />
+      );
     case "follow-up-email":
       return <PlaceholderPanel label="Follow Up Email" />;
     case "qr-code":
@@ -81,11 +96,24 @@ export default function MemberProfilePage({ memberId }: { memberId: string }) {
     return DEFAULT_FORM;
   });
 
+  const [leadCaptureForm, setLeadCaptureForm] = useState<LeadCaptureFormData>(
+    DEFAULT_LEAD_CAPTURE_FORM,
+  );
+
   const handleChange = (patch: Partial<MemberProfileFormData>) =>
     setForm((prev) => ({ ...prev, ...patch }));
 
-  const handleCancel = () => setForm(DEFAULT_FORM);
+  const handleLeadCaptureChange = (patch: Partial<LeadCaptureFormData>) =>
+    setLeadCaptureForm((prev) => ({ ...prev, ...patch }));
+
+  const handleCancel = () => setForm(form);
   const handleUpdate = () => console.log("Updated:", form);
+  const handleReset = () => setLeadCaptureForm(DEFAULT_LEAD_CAPTURE_FORM);
+
+  // Only pass leadCaptureForm to the preview when on the lead-capture-form section
+  const previewLeadCapture =
+    activeSection === "lead-capture-form" ? leadCaptureForm : undefined;
+  const isResetVisible = activeSection === "lead-capture-form" ? true : false;
 
   return (
     <Box
@@ -149,13 +177,24 @@ export default function MemberProfilePage({ memberId }: { memberId: string }) {
           sx={{
             flex: 1,
             overflowY: "auto",
-            px: { xs: 2.5, md: 3.5 },
+            // px: { xs: 2.5, md: 3.5 },
             py: 3,
             maxWidth: 660,
           }}
         >
-          <ActivePanel id={activeSection} form={form} onChange={handleChange} />
-          <FormFooter onCancel={handleCancel} onUpdate={handleUpdate} />
+          <ActivePanel
+            id={activeSection}
+            form={form}
+            onChange={handleChange}
+            leadCaptureForm={leadCaptureForm}
+            onLeadCaptureChange={handleLeadCaptureChange}
+          />
+          <FormFooter
+            onCancel={handleCancel}
+            onUpdate={handleUpdate}
+            isResetVisible={isResetVisible}
+            handleReset={handleReset}
+          />
         </Box>
 
         <Divider
@@ -175,7 +214,7 @@ export default function MemberProfilePage({ memberId }: { memberId: string }) {
             // borderLeft: "1px solid #EAE8F0",
           }}
         >
-          <CardLivePreview form={form} />
+          <CardLivePreview form={form} leadCaptureForm={previewLeadCapture} />
         </Box>
       </Box>
     </Box>
