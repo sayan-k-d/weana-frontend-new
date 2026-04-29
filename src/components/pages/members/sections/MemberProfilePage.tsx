@@ -13,7 +13,7 @@ import {
   type SideMenuItemId,
 } from "@/components/features/memberProfile";
 import { DEFAULT_FORM } from "@/components/pages/members/constants/memberProfile";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 import { initialMembers } from "@/lib/constants";
 import { LinksSection } from "./LinksSection";
 
@@ -59,9 +59,9 @@ function ActivePanel({
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function MemberProfilePage() {
-  const searchParams = useSearchParams();
-  const memberId = searchParams.get("id");
+export default function MemberProfilePage({ memberId }: { memberId: string }) {
+  // const searchParams = useSearchParams();
+  // const memberId = searchParams.get("id");
 
   const [activeSection, setActiveSection] = useState<SideMenuItemId>("about");
   const memberData = useMemo(

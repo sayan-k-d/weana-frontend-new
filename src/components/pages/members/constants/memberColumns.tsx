@@ -68,7 +68,7 @@ export const columns = (
       return (
         <Link
           className="table-link"
-          href={`/members/memberProfile?id=${m.id}`}
+          href={`/members/${m.id}`}
           style={{ textDecoration: "none", color: "#000000" }}
         >
           <Box
