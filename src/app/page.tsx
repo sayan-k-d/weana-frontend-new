@@ -1,11 +1,5 @@
-import { redirect } from "next/navigation";
+import BasePage from "@/components/pages/base-page";
 
-export default function RootPage() {
-  redirect("/businessAdminDashboard");
+export default function Home() {
+  return <BasePage />;
 }
-
-// import HomePage from "../components/pages/home";
-
-// export default function Home() {
-//   return <HomePage />;
-// }

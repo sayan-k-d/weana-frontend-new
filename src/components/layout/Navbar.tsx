@@ -17,7 +17,7 @@ const C = {
 };
 
 export default function Navbar({ isHome = false }: { isHome?: boolean }) {
-  const links = ["our apps", "features", "pricing", "help"];
+  const links = ["features", "products", "resources", "pricing"];
   return (
     <Box
       component="nav"
@@ -28,11 +28,16 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
         background: isHome
           ? "transparent"
           : "linear-gradient(360deg, #CEB7E7 0%, #F5ECFF 100%)",
-        backdropFilter: "blur(12px)",
+        backdropFilter: isHome ? "none" : "blur(12px)",
+        animation: "navSlideDown 1.1s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "@keyframes navSlideDown": {
+          "0%": { opacity: 0, transform: "translateY(-16px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
         // borderBottom: `1px solid ${C.border}`,
       }}
     >
-      <Container maxWidth="xl">
+      <Container maxWidth="lg">
         {/* <Stack direction="row" alignItems="center" justifyContent="space-between" py={1.5}> */}
         <Stack
           direction="row"
@@ -43,11 +48,20 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
           }}
         >
           {/* Logo */}
-          <Link href="/home" passHref>
-            <Box
-              component="a"
-              sx={{ display: "inline-flex", alignItems: "center" }}
-            >
+          <Box
+            component={Link}
+            href="/"
+            sx={{ display: "inline-flex", alignItems: "center" }}
+          >
+            {isHome ? (
+              <Image
+                src="/images/logo_white.png"
+                alt="logo"
+                width={100}
+                height={20}
+                priority
+              />
+            ) : (
               <Image
                 src="/images/logo.png"
                 alt="logo"
@@ -55,8 +69,8 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
                 height={20}
                 priority
               />
-            </Box>
-          </Link>
+            )}
+          </Box>
 
           {/* Nav links */}
           <Stack
@@ -66,19 +80,20 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
               alignItems: "center",
             }}
           >
-            {links.map((l, i) => (
+            {links.map((l) => (
               // <Link key={l} href={`/${l.toLowerCase()}`} style={{ textDecoration: 'none' }}>
               <Typography
-                key={i}
+                key={l}
                 component={Link}
                 href={`/${l.toLowerCase()}`}
                 sx={{
                   fontSize: 13.5,
-                  color: "#555",
+                  color: isHome ? "#F7F7F7" : "#1E1E1E",
                   fontWeight: 500,
                   textDecoration: "none",
                   textTransform: "capitalize",
-                  "&:hover": { color: C.navy },
+                  transition: "transform 320ms ease, color 320ms ease",
+                  "&:hover": { color: C.navy, transform: "translateY(-2px)" },
                 }}
               >
                 {l}
@@ -95,24 +110,24 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
               alignItems: "center",
             }}
           >
-            <Box
+            <Typography
+              component={Link}
+              href={`/login`}
               sx={{
-                width: 34,
-                height: 34,
-                borderRadius: "50%",
-                border: `1.5px solid ${C.border}`,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                "&:hover": { borderColor: C.purple },
+                fontSize: 13.5,
+                color: isHome ? "#F7F7F7" : "#1E1E1E",
+                fontWeight: 500,
+                textDecoration: "none",
+                textTransform: "capitalize",
+                transition: "transform 320ms ease, color 320ms ease",
+                "&:hover": { color: C.navy, transform: "translateY(-2px)" },
               }}
             >
-              <ShoppingCartOutlinedIcon sx={{ fontSize: 17, color: "#555" }} />
-            </Box>
+              Login
+            </Typography>
             <Button
               component={Link}
-              href="/login"
+              href="/signup"
               sx={{
                 background: C.coral,
                 color: "#fff",
@@ -122,9 +137,14 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
                 fontSize: 14,
                 fontWeight: 600,
                 textTransform: "none",
+                transition: "transform 320ms ease, box-shadow 320ms ease",
+                "&:hover": {
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 12px 22px rgba(123,73,177,0.35)",
+                },
               }}
             >
-              Login / Register
+              Get Started for Free
             </Button>
           </Stack>
         </Stack>
