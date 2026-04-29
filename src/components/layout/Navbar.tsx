@@ -5,6 +5,7 @@ import {
 } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Image from 'next/image';
+import { useAuth } from '@/hooks/useAuth';
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
 const C = {
@@ -20,6 +21,7 @@ const C = {
 
 export default function Navbar({ isHome = false }: { isHome?: boolean }) {
     const links = ['features', 'products', 'resources', 'pricing'];
+    const { login } = useAuth();
     return (
         <Box
             component="nav"
@@ -72,7 +74,7 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
                             alignItems: "center",
                         }}
                     >
-                        <Typography component={Link} href={`/login`} sx={{ fontSize: 13.5, color: isHome ? '#F7F7F7' : "#1E1E1E", fontWeight: 500, textDecoration: 'none', textTransform: "capitalize", transition: 'transform 320ms ease, color 320ms ease', '&:hover': { color: C.navy, transform: 'translateY(-2px)' } }}>
+                        <Typography onClick={()=>{login('keycloak')}} sx={{ fontSize: 13.5, color: isHome ? '#F7F7F7' : "#1E1E1E", fontWeight: 500, textDecoration: 'none', textTransform: "capitalize", transition: 'transform 320ms ease, color 320ms ease', '&:hover': { color: C.navy, transform: 'translateY(-2px)' } }}>
                             Login
                         </Typography>
                         <Button
