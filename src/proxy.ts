@@ -21,7 +21,7 @@ export function proxy(request: NextRequest) {
 
   // Protected dashboard
   if (isDashboard && !token) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/home", request.url));
   }
 
   // Already logged in → block auth pages

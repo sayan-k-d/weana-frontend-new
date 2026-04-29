@@ -21,3 +21,8 @@ body {
   height: 100%;
   overflow: hidden;
 }
+
+.table-link:hover {
+  background-color: #ede8f6;
+  color: #6b3fa0 !important;
+}

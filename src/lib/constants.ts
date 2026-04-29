@@ -30,7 +30,7 @@ export const NAV_SECTIONS: NavSection[] = [
   {
     title: "Home",
     icon: React.createElement(HomeOutlinedIcon, { sx: { fontSize: 18 } }),
-    path: "/home",
+    path: "/businessAdminDashboard",
     active: true,
   },
   {
