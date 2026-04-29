@@ -112,7 +112,7 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
                             alignItems: "center",
                         }}
                     >
-                        <Typography onClick={()=>{login('keycloak')}} sx={{ fontSize: 13.5, color: isHome ? '#F7F7F7' : "#1E1E1E", fontWeight: 500, textDecoration: 'none', textTransform: "capitalize", transition: 'transform 320ms ease, color 320ms ease', '&:hover': { color: C.navy, transform: 'translateY(-2px)' } }}>
+                        <Typography onClick={()=>{login('keycloak')}} sx={{cursor:"pointer", fontSize: 13.5, color: isHome ? '#F7F7F7' : "#1E1E1E", fontWeight: 500, textDecoration: 'none', textTransform: "capitalize", transition: 'transform 320ms ease, color 320ms ease', '&:hover': { color: C.navy, transform: 'translateY(-2px)' } }}>
                             Login
                         </Typography>
                         <Button
