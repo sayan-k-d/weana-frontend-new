@@ -29,7 +29,7 @@ export default function LoginForm() {
   const onSubmit = handleSubmit(async () => {
     // Mocked submit — replace with real auth later.
     await new Promise((r) => setTimeout(r, 300));
-    router.push("/home");
+    router.push("/BusinessAdminDashboard");
   });
 
   return (
