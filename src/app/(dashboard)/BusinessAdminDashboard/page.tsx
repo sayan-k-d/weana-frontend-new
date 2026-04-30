@@ -1,8 +1,8 @@
-import BusinessAdminDashboard from "@/components/pages/dashboard";
+import BusinessAdminDashboard from "@/components/pages/businessAdminDashboard";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Business Admin Dashboard",
+  title: "Dashboard",
 };
 
 export default function BusinessAdmin() {
