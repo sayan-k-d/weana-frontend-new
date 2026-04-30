@@ -34,8 +34,8 @@ const palette: ThemeOptions["palette"] = {
 export const theme = createTheme({
   palette,
   typography: {
-    // fontFamily: '"Inter", "Helvetica Neue", Arial, sans-serif',
-    // fontFamily: '"Codec Pro", sans-serif',
+    fontFamily:
+      'var(--font-codec-pro), "Inter", "Helvetica Neue", Arial, sans-serif',
     h1: { fontSize: "2.25rem", fontWeight: 700, lineHeight: 1.2 },
     h2: { fontSize: "1.875rem", fontWeight: 700, lineHeight: 1.3 },
     h3: { fontSize: "1.5rem", fontWeight: 600, lineHeight: 1.4 },
