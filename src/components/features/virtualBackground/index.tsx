@@ -10,7 +10,7 @@ import {
   DEFAULT_VIRTUAL_BG_FORM,
   VB_COLOR_OPTIONS,
   type VirtualBackgroundFormData,
-} from "@/components/pages/members/constants/qrCode";
+} from "@/components/pages/businessAdminDashboard/members/constants/qrCode";
 
 interface VirtualBackgroundSectionProps {
   form?: VirtualBackgroundFormData;

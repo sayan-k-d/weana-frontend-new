@@ -12,7 +12,7 @@ import { FollowUpEmailFooter } from "./Followupemailfooter";
 import {
   DEFAULT_FOLLOW_UP_EMAIL_FORM,
   type FollowUpEmailFormData,
-} from "@/components/pages/members/constants/followupEmail";
+} from "@/components/pages/businessAdminDashboard/members/constants/followupEmail";
 
 interface FollowUpEmailSectionProps {
   form?: FollowUpEmailFormData;

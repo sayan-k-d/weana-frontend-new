@@ -2,7 +2,7 @@
 
 import { Box, Typography, Stack } from "@mui/material";
 import IosShareRoundedIcon from "@mui/icons-material/IosShareRounded";
-import type { FollowUpEmailFormData } from "@/components/pages/members/constants/followupEmail";
+import type { FollowUpEmailFormData } from "@/components/pages/businessAdminDashboard/members/constants/followupEmail";
 
 interface EmailLivePreviewProps {
   form: FollowUpEmailFormData;
