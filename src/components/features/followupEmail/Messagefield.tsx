@@ -14,7 +14,7 @@ import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownR
 import {
   VARIABLE_OPTIONS,
   type VariableToken,
-} from "@/components/pages/members/constants/followupEmail";
+} from "@/components/pages/businessAdminDashboard/members/constants/followupEmail";
 
 interface MessageFieldProps {
   value: string;

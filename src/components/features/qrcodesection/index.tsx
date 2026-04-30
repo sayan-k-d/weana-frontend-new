@@ -11,7 +11,7 @@ import {
   DEFAULT_QR_CODE_FORM,
   QR_COLOR_OPTIONS,
   type QRCodeFormData,
-} from "@/components/pages/members/constants/qrCode";
+} from "@/components/pages/businessAdminDashboard/members/constants/qrCode";
 
 interface QRCodeSectionProps {
   form?: QRCodeFormData;

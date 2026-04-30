@@ -20,7 +20,7 @@ import AddIcon from "@mui/icons-material/Add";
 import {
   CARD_LAYOUTS,
   FONT_OPTIONS,
-} from "@/components/pages/members/constants/memberProfile";
+} from "@/components/pages/businessAdminDashboard/members/constants/memberProfile";
 import type { CardLayout, MemberProfileFormData } from "@/types";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 

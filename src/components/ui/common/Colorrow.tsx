@@ -1,6 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import { ColorSwatch } from "./ColorSwatch";
-import { THEME_COLORS } from "@/components/pages/members/constants/memberProfile";
+import { THEME_COLORS } from "@/components/pages/businessAdminDashboard/members/constants/memberProfile";
 
 interface ColorRowProps {
   label: string;

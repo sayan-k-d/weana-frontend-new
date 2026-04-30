@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { IntegrationCard } from "./IntegrationCard";
-import { EventbriteIconLarge } from "@/components/pages/members/constants/addMember";
+import { EventbriteIconLarge } from "@/components/pages/businessAdminDashboard/members/constants/addMember";
 
 export function EventbritePanel() {
   return (

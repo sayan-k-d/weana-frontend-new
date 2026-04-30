@@ -5,7 +5,7 @@ import { SectionLabel } from "@/components/ui/common/SectionLabel";
 import {
   SIDE_MENU_ITEMS,
   MENU_SECTIONS,
-} from "@/components/pages/members/constants/memberProfile";
+} from "@/components/pages/businessAdminDashboard/members/constants/memberProfile";
 import type { SideMenuItemId } from "@/types";
 
 interface ProfileSideMenuProps {

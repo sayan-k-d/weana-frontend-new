@@ -27,7 +27,7 @@ import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Footer from "@/components/layout/Footer";
-import SocialProof from "./section/carousel";
+import SocialProof from "./section/home/carousel";
 import Navbar from "@/components/layout/Navbar";
 
 const C = {
