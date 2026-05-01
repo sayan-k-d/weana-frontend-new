@@ -46,7 +46,7 @@ export default function BusinessAdminDashboard() {
         console.error("Failed to fetch profile:", err);
   
         // redirect if not authenticated
-        router.push("/home");
+        router.push("/");
       }
     };
   

@@ -159,7 +159,13 @@ export function AdminSidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
-
+  const openCMS = async () => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}wordpress-sso`,{credentials: "include"});
+  
+    const data = await res.json();
+  
+    window.location.href = data.redirectUrl;
+  };
   /**
    * A path is active if the current pathname matches it exactly
    * OR if the pathname starts with it followed by a "/" (nested routes).
@@ -239,7 +245,13 @@ export function AdminSidebar() {
               label={item.label}
               isActive={isActive(item.path)}
               collapsed={collapsed}
-              onClick={() => router.push(item.path)}
+              onClick={() => {
+                if(item.path == "/admin/cms"){
+                  openCMS()
+                  return;
+                }
+                router.push(item.path)
+              }}
             />
             {item.dividerAfter && (
               <Divider sx={{ my: 1, borderColor: ADMIN_COLORS.cardBorder }} />
