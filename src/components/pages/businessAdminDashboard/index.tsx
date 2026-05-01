@@ -1,17 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Box, Button, Paper, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 
-import Sidebar from "@/components/layout/Sidebar";
-import WelcomeDialog from "./sections/WelcomeDialog";
-import OnboardingBanner from "./sections/OnboardingBanner";
-import TeamPerformanceCard from "./sections/TeamPerformanceCard";
-import CampaignsCard from "./sections/CampaignsCard";
-import RecommendationsCard from "./sections/RecommendationsCard";
-import RecentLeadsCard from "./sections/LeadsSection";
-import { ExpertCard, FeatureExplorer } from "./sections/FeaturesSection";
+import WelcomeDialog from "./sections/dashboard/WelcomeDialog";
+import OnboardingBanner from "./sections/dashboard/OnboardingBanner";
+import TeamPerformanceCard from "./sections/dashboard/TeamPerformanceCard";
+import CampaignsCard from "./sections/dashboard/CampaignsCard";
+import RecommendationsCard from "./sections/dashboard/RecommendationsCard";
+import RecentLeadsCard from "./sections/dashboard/LeadsSection";
+import { ExpertCard, FeatureExplorer } from "./sections/dashboard/FeaturesSection";
 import { useWelcomeDialog } from "@/hooks/useWelcomeDialog";
 
 export default function BusinessAdminDashboard() {

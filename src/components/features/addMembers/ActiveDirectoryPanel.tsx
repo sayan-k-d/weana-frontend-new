@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { IntegrationCard } from "./IntegrationCard";
-import { ActiveDirectoryIconLarge } from "@/components/pages/members/constants/addMember";
+import { ActiveDirectoryIconLarge } from "@/components/pages/businessAdminDashboard/members/constants/addMember";
 
 export function ActiveDirectoryPanel() {
   return (

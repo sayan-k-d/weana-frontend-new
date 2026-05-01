@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 import {
   ADD_METHODS,
   MethodIcon,
-} from "@/components/pages/members/constants/addMember";
+} from "@/components/pages/businessAdminDashboard/members/constants/addMember";
 import type { MethodId } from "@/types";
 
 interface MethodSidebarProps {
@@ -16,7 +16,7 @@ export function MethodSidebar({ activeId, onChange }: MethodSidebarProps) {
   return (
     <Box
       sx={{
-        minWidth:250,
+        minWidth: 250,
         width: 250,
         flexShrink: 0,
         borderRight: "1px solid #EEECF5",

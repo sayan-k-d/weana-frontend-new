@@ -1,11 +1,9 @@
-'use client';
-import Link from 'next/link';
-import {
-    Box, Typography, Button, Stack, Container,
-} from '@mui/material';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import Image from 'next/image';
-import { useAuth } from '@/hooks/useAuth';
+"use client";
+import Link from "next/link";
+import { Box, Typography, Button, Stack, Container } from "@mui/material";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import Image from "next/image";
+import { useAuth } from "@/hooks/useAuth";
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
 const C = {
@@ -21,7 +19,7 @@ const C = {
 
 export default function Navbar({ isHome = false }: { isHome?: boolean }) {
   const links = ["features", "products", "resources", "pricing"];
-    const { login } = useAuth();
+  const { login } = useAuth();
   return (
     <Box
       component="nav"
@@ -78,52 +76,103 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
 
           {/* Nav links */}
           <Stack
-            direction="row"
+            direction={"row"}
             spacing={3.5}
             sx={{
               alignItems: "center",
             }}
           >
             {links.map((l) => (
-              // <Link key={l} href={`/${l.toLowerCase()}`} style={{ textDecoration: 'none' }}>
-              <Typography
+              <Box
                 key={l}
                 component={Link}
                 href={`/${l.toLowerCase()}`}
                 sx={{
+                  position: "relative",
                   fontSize: 13.5,
-                  color: isHome ? "#F7F7F7" : "#1E1E1E",
+                  color: isHome ? "#e0e0e0" : "#1E1E1E",
                   fontWeight: 500,
                   textDecoration: "none",
                   textTransform: "capitalize",
-                  transition: "transform 320ms ease, color 320ms ease",
-                  "&:hover": { color: C.navy, transform: "translateY(-2px)" },
+                  letterSpacing: "0.01em",
+                  pb: "3px",
+                  transition: "color 280ms ease",
+
+                  "&::after": {
+                    content: '""',
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "1.5px",
+                    borderRadius: "2px",
+                    backgroundColor: isHome ? "#A89FFF" : C.purple,
+                    transform: "scaleX(0)",
+                    transformOrigin: "left center",
+                    transition: "transform 320ms cubic-bezier(0.4, 0, 0.2, 1)",
+                  },
+
+                  "&:hover": {
+                    color: isHome ? "#A89FFF" : C.purple,
+                    "&::after": {
+                      transform: "scaleX(1)",
+                    },
+                  },
                 }}
               >
                 {l}
-              </Typography>
-              // </Link>
+              </Box>
             ))}
           </Stack>
-
-                    {/* Actions */}
-                    <Stack direction="row" spacing={1.5}
-                        sx={{
-                            alignItems: "center",
-                        }}
-                    >
-                        <Typography onClick={()=>{login('keycloak')}} sx={{ fontSize: 13.5, color: isHome ? '#F7F7F7' : "#1E1E1E", fontWeight: 500, textDecoration: 'none', textTransform: "capitalize", transition: 'transform 320ms ease, color 320ms ease', '&:hover': { color: C.navy, transform: 'translateY(-2px)' } }}>
-                            Login
-                        </Typography>
-                        <Button
-                            component={Link} href="/signup"
-                            sx={{ background: C.coral, color: '#fff', borderRadius: 999, px: 3, py: 1.3, fontSize: 14, fontWeight: 600, textTransform: 'none', transition: 'transform 320ms ease, box-shadow 320ms ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 12px 22px rgba(123,73,177,0.35)' } }}
-                        >
-                            Get Started for Free
-                        </Button>
-                    </Stack>
-                </Stack>
-            </Container>
-        </Box>
-    );
+          {/* Actions */}
+          <Stack
+            direction="row"
+            spacing={1.5}
+            sx={{
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              onClick={() => {
+                login("keycloak");
+              }}
+              sx={{
+                cursor: "pointer",
+                fontSize: 13.5,
+                color: isHome ? "#F7F7F7" : "#1E1E1E",
+                fontWeight: 500,
+                textDecoration: "none",
+                textTransform: "capitalize",
+                transition: "transform 320ms ease, color 320ms ease",
+                "&:hover": { color: C.navy, transform: "translateY(-2px)" },
+              }}
+            >
+              Login
+            </Typography>
+            <Button
+              component={Link}
+              href="/signup"
+              sx={{
+                background: C.coral,
+                color: "#fff",
+                borderRadius: 999,
+                px: 3,
+                py: 1.3,
+                fontSize: 14,
+                fontWeight: 600,
+                textTransform: "none",
+                transition: "transform 320ms ease, box-shadow 320ms ease",
+                "&:hover": {
+                  transform: "translateY(-2px)",
+                  boxShadow: "0 12px 22px rgba(123,73,177,0.35)",
+                },
+              }}
+            >
+              Get Started for Free
+            </Button>
+          </Stack>
+        </Stack>
+      </Container>
+    </Box>
+  );
 }
