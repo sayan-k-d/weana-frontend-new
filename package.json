@@ -30,7 +30,7 @@
     "react-redux": "^9.2.0",
     "store": "^2.0.12",
     "zod": "^4.4.1",
-    "recharts": "^3.8.1",
+    "recharts": "^3.8.1"
   },
   "devDependencies": {
     "@types/node": "^20",
