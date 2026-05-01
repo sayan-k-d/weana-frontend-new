@@ -319,6 +319,26 @@ export default function Signup() {
     setAccountType('');
   };
 
+  const handleGoogleSignup = async () => {
+    const base = `${process.env.NEXT_PUBLIC_KEYCLOAK_URL}/realms/${process.env.NEXT_PUBLIC_KEYCLOAK_REALM}/protocol/openid-connect/auth`;
+    const state = btoa(JSON.stringify({
+        provider: "google",
+        flow: "signup",
+        type:'team'
+    }));
+
+    const params = new URLSearchParams({
+        client_id: process.env.NEXT_PUBLIC_KEYCLOAK_BACKEND_CLIENT_ID!,
+        redirect_uri: process.env.NEXT_PUBLIC_KEYCLOAK_REDIRECT_URI!,
+        response_type: "code",
+        scope: "openid",
+        kc_idp_hint: "google",
+        state,
+    });
+
+    const url = `${base}?${params.toString()}`;
+    window.location.href = url;
+};
   return (
     <PageWrapper>
       {accountType === '' ? (
@@ -553,7 +573,7 @@ export default function Signup() {
 
               {/* Social buttons */}
               <Stack spacing={1.2}>
-                <SocialButton fullWidth startIcon={<GoogleIcon />}>
+                <SocialButton fullWidth startIcon={<GoogleIcon />} onClick={handleGoogleSignup}>
                   Continue with Google
                 </SocialButton>
                 <SocialButton fullWidth startIcon={<MicrosoftIcon />}>
