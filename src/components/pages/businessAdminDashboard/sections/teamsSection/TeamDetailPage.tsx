@@ -10,7 +10,15 @@ import type {
   TeamDetailData,
   TeamDetailSectionId,
   TeamMember,
+  TeamGeneralFormData,
+  TeamRestrictionsFormData,
 } from "@/components/pages/businessAdminDashboard/teams/constants/teamDetail";
+import {
+  DEFAULT_TEAM_GENERAL_FORM,
+  DEFAULT_TEAM_RESTRICTIONS_FORM,
+} from "@/components/pages/businessAdminDashboard/teams/constants/teamDetail";
+import type { TemplateAutoAssignFormData } from "@/components/pages/businessAdminDashboard/teams/constants/Templateautoassignconstants";
+import { DEFAULT_TEMPLATE_AUTO_ASSIGN_FORM } from "@/components/pages/businessAdminDashboard/teams/constants/Templateautoassignconstants";
 
 // ── Mock seed data — replace with real API / props ────────────────────────────
 const MOCK_TEAM: TeamDetailData = {
@@ -37,6 +45,8 @@ const MOCK_TEAM: TeamDetailData = {
       partOfTeam: false,
     },
   ],
+  general: { ...DEFAULT_TEAM_GENERAL_FORM, teamName: "Sales Department" },
+  restrictions: { ...DEFAULT_TEAM_RESTRICTIONS_FORM },
 };
 
 interface TeamDetailPageProps {
@@ -66,6 +76,11 @@ export default function TeamDetailPage({
     // Navigate to the members view or open the View Members panel
     setActiveSection("view-members");
   };
+
+  const [templateAutoAssignData, setTemplateAutoAssignData] =
+    useState<TemplateAutoAssignFormData>({
+      ...DEFAULT_TEMPLATE_AUTO_ASSIGN_FORM,
+    });
 
   return (
     <Box
@@ -111,6 +126,25 @@ export default function TeamDetailPage({
             activeSection={activeSection}
             members={team.members}
             onMembersUpdate={handleMembersUpdate}
+            generalData={team.general}
+            onGeneralSave={(data: TeamGeneralFormData) =>
+              setTeam((prev) => ({
+                ...prev,
+                name: data.teamName || prev.name,
+                general: data,
+              }))
+            }
+            // Restrictions
+            restrictionsData={team.restrictions}
+            onRestrictionsSave={(data: TeamRestrictionsFormData) =>
+              setTeam((prev) => ({ ...prev, restrictions: data }))
+            }
+            onCopyRestrictions={() => console.log("Copy restrictions")}
+            // Template Auto Assign
+            templateAutoAssignData={templateAutoAssignData}
+            onTemplateAutoAssignSave={setTemplateAutoAssignData}
+            // Integrations
+            onRequestIntegration={() => console.log("Request integration")}
           />
         </Box>
       </Box>
