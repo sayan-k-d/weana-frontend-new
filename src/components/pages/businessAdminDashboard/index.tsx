@@ -12,7 +12,7 @@ import RecommendationsCard from "./sections/dashboard/RecommendationsCard";
 import RecentLeadsCard from "./sections/dashboard/LeadsSection";
 import { ExpertCard, FeatureExplorer } from "./sections/dashboard/FeaturesSection";
 import { useWelcomeDialog } from "@/hooks/useWelcomeDialog";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function BusinessAdminDashboard() {
   const { isOpen: isWelcomeOpen, close: closeWelcome } = useWelcomeDialog(true);
