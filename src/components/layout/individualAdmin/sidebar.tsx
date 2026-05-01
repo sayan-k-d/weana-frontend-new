@@ -89,9 +89,12 @@ export default function IndividualSidebar() {
           const isMyProfilesRoute =
             pathname === "/individual-admin/dashboard" ||
             pathname.startsWith("/individual-admin/member-profile");
+          const isContactsRoute = pathname.startsWith("/individual-admin/contacts");
           const isActive =
             item.label === "My Profiles"
               ? isMyProfilesRoute
+              : item.label === "Contacts"
+                ? isContactsRoute
               : pathname === item.path;
 
           return (
