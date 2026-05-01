@@ -847,7 +847,7 @@ export default function Signup() {
                   width={50}
                   height={50}
                 />
-              </Box>
+              </Stack>
 
               {/* Sign Up button */}
               <SignUpButton fullWidth onClick={handleSignUp} disabled={loading}>
