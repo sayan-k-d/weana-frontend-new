@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { Box, Typography } from "@mui/material";
-import type { QRCodeFormData } from "@/components/pages/members/constants/qrCode";
+import type { QRCodeFormData } from "@/components/pages/businessAdminDashboard/members/constants/qrCode";
 import { drawPlaceholder } from "@/lib/utils";
 
 interface QRCodePreviewProps {

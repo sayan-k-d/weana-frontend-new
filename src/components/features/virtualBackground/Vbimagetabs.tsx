@@ -6,7 +6,7 @@ import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import {
   LIBRARY_IMAGES,
   type VirtualBackgroundFormData,
-} from "@/components/pages/members/constants/qrCode";
+} from "@/components/pages/businessAdminDashboard/members/constants/qrCode";
 
 // ── Mini QR for thumbnails ────────────────────────────────────────────────────
 function ThumbnailQR({ color, size = 16 }: { color: string; size?: number }) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Checkbox, Typography, FormControlLabel } from "@mui/material";
-import type { VirtualBackgroundFormData } from "@/components/pages/members/constants/qrCode";
+import type { VirtualBackgroundFormData } from "@/components/pages/businessAdminDashboard/members/constants/qrCode";
 
 interface VBCheckboxGroupProps {
   form: VirtualBackgroundFormData;
