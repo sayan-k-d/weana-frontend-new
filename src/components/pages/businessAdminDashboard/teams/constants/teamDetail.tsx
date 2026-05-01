@@ -20,6 +20,8 @@ export interface TeamDetailData {
   name: string; // e.g. "Sales Department"
   color: string;
   members: TeamMember[];
+  general: TeamGeneralFormData;
+  restrictions: TeamRestrictionsFormData;
 }
 
 // ── General ───────────────────────────────────────────────────────────────────

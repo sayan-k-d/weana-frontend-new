@@ -5,8 +5,8 @@ import { EditMembersPanel } from "./Editmemberspanel";
 import {
   GeneralPanel as PlaceholderGeneralPanel,
   RestrictionsPanel as PlaceholderRestrictionsPanel,
-  TemplateAutoAssignPanel,
-  IntegrationsPanel,
+  TemplateAutoAssignPanel as PlaceholderTemplateAutoAssignPanel,
+  IntegrationsPanel as PlaceholderIntegrationsPanel,
   ViewMembersPanel,
 } from "./Placeholderpanels";
 import type {
@@ -17,6 +17,9 @@ import type {
 } from "@/components/pages/businessAdminDashboard/teams/constants/teamDetail";
 import { GeneralPanel } from "./GeneralPanel";
 import { RestrictionsPanel } from "./RestrictionsPanel";
+import { TemplateAutoAssignFormData } from "@/components/pages/businessAdminDashboard/teams/constants/Templateautoassignconstants";
+import { TemplateAutoAssignPanel } from "./Templateautoassignpanel";
+import { IntegrationsPanel } from "./Integrationspanel";
 
 interface TeamDetailMainContentProps {
   activeSection: TeamDetailSectionId;
@@ -29,6 +32,11 @@ interface TeamDetailMainContentProps {
   restrictionsData?: TeamRestrictionsFormData;
   onRestrictionsSave?: (data: TeamRestrictionsFormData) => void;
   onCopyRestrictions?: () => void;
+  // Template Auto Assign
+  templateAutoAssignData?: TemplateAutoAssignFormData;
+  onTemplateAutoAssignSave?: (data: TemplateAutoAssignFormData) => void;
+  // Integrations
+  onRequestIntegration?: () => void;
 }
 
 export function TeamDetailMainContent({
@@ -40,6 +48,9 @@ export function TeamDetailMainContent({
   restrictionsData,
   onRestrictionsSave,
   onCopyRestrictions,
+  templateAutoAssignData,
+  onTemplateAutoAssignSave,
+  onRequestIntegration,
 }: TeamDetailMainContentProps) {
   const renderPanel = () => {
     switch (activeSection) {
@@ -60,9 +71,16 @@ export function TeamDetailMainContent({
           />
         );
       case "template-auto-assign":
-        return <TemplateAutoAssignPanel />;
+        return (
+          <TemplateAutoAssignPanel
+            initialData={templateAutoAssignData}
+            onSave={onTemplateAutoAssignSave}
+          />
+        );
       case "integrations":
-        return <IntegrationsPanel />;
+        return (
+          <IntegrationsPanel onRequestIntegration={onRequestIntegration} />
+        );
       case "view-members":
         return <ViewMembersPanel />;
     }
