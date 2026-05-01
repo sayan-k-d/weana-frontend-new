@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect,useState,Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { log } from "console";
 
@@ -12,8 +12,9 @@ function CallbackPageContent() {
   useEffect(() => {
     const code = params.get("code");
     const state = params.get("state");
-    const signup_session_id = localStorage.getItem("signup_session_id") || undefined;
-  
+    const signup_session_id =
+      localStorage.getItem("signup_session_id") || undefined;
+
     if (!code) {
       setStatus("Missing authorization code");
       return;
@@ -21,7 +22,7 @@ function CallbackPageContent() {
     let decodedState;
     try {
       decodedState = JSON.parse(atob(state || ""));
-    } catch(err) {
+    } catch (err) {
       console.log("Failed to decode state:", err);
       setStatus("Invalid state");
       return;
@@ -31,44 +32,37 @@ function CallbackPageContent() {
       try {
         setStatus("Signing you in...");
         let endpoint = "";
-  
+
         if (decodedState?.flow === "signup") {
           endpoint = `${process.env.NEXT_PUBLIC_API_URL}auth/google-auth`;
         } else {
           endpoint = `${process.env.NEXT_PUBLIC_API_URL}auth/exchange`;
         }
-        const res = await fetch(
-          endpoint,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ code, signup_session_id}),
-          }
-        );
-  
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ code, signup_session_id }),
+        });
+
         const data = await res.json();
-  
+
         if (!res.ok) {
           throw new Error(data.message || "Login failed");
         }
-  
+
         // store token
-        localStorage.setItem(
-          "access_token",
-          data.access_token || data.token
-        );
-  
+        localStorage.setItem("access_token", data.access_token || data.token);
+
         setStatus("Success! Redirecting...");
-        router.push("/BusinessAdminDashboard");
-  
+        router.push("/business-admin-dashboard");
       } catch (err: any) {
         console.error(err);
         setStatus(err.message || "Login failed");
       }
     };
-  
+
     exchangeToken(decodedState);
   }, [params]);
   return <p>{status}</p>;
