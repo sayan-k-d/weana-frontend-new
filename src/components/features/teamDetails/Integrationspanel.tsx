@@ -80,9 +80,9 @@ function IntegrationCard({ item }: { item: Integration }) {
       <IntegrationTile
         onClick={() => console.log("Request integration")}
         sx={{
-          flexDirection: "column",
-          alignItems: "flex-start",
-          gap: 0.5,
+          flexDirection: "row",
+          alignItems: "center",
+          gap: "12px",
           py: 2,
         }}
       >
@@ -100,7 +100,7 @@ function IntegrationCard({ item }: { item: Integration }) {
               lineHeight: 1.3,
             }}
           >
-            {`Don't see your integration?`}
+           {`Don't see your integration?`}
           </Typography>
           <Typography
             sx={{ fontSize: 12, color: TD_COLORS.brand, fontWeight: 600 }}
