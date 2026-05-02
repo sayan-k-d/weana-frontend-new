@@ -99,7 +99,11 @@ function CallbackPageContent() {
         let endpoint = "";
         if (decodedState?.flow === "signup") {
           endpoint = `${process.env.NEXT_PUBLIC_API_URL}auth/google-auth`;
-        } else {
+        } 
+        else if(decodedState?.flow === "admin-login"){
+          endpoint = `${process.env.NEXT_PUBLIC_API_URL}auth/exchange-admin`;
+        }
+        else {
           endpoint = `${process.env.NEXT_PUBLIC_API_URL}auth/exchange`;
         }
 
@@ -108,7 +112,7 @@ function CallbackPageContent() {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include", // 🔥 VERY IMPORTANT
+          credentials: "include",
           body: JSON.stringify({ code, signup_session_id }),
         });
 
@@ -117,11 +121,12 @@ function CallbackPageContent() {
           throw new Error(data.message || "Login failed");
         }
 
-        // ✅ No token storage here
-        // Cookies are already set by backend
-
         setStatus("Success! Redirecting...");
-        router.push("/business-admin-dashboard");
+        if(decodedState?.flow === "admin-login"){
+          router.push("/weana-admin-dashboard");
+          return;
+        }
+        router.push("/individual-admin/dashboard");
 
       } catch (err: any) {
         console.error(err);
