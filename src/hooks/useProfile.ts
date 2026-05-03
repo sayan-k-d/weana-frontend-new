@@ -37,7 +37,7 @@ export function useProfile() {
     // };
     const fetchProfile = async () => {
         try {
-          const token = localStorage.getItem("accessToken"); // adjust key name if different
+          const token = localStorage.getItem("access_token"); // adjust key name if different
       
           const res = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}profile`,
