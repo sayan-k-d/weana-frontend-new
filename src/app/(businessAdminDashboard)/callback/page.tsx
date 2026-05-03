@@ -116,11 +116,11 @@ function CallbackPageContent() {
           body: JSON.stringify({ code, signup_session_id }),
         });
         const data = await res.json();
+        localStorage.setItem("access_token", data.access_token || data.token);
+        localStorage.setItem("refresh_token", data.refresh_token || "");
         if (!res.ok) {
           throw new Error(data.message || "Login failed");
         }
-        console.log("Login successful, response:", data);
-        return;
         setStatus("Success! Redirecting...");
         if(decodedState?.flow === "admin-login"){
           router.push("/weana-admin-dashboard");
