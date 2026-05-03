@@ -9,6 +9,7 @@ import MobileAppModal from "./sections/MobileAppModal";
 import OnboardingCard from "./sections/OnboardingCard";
 import ProfileCards from "./sections/ProfileCards";
 import ShareProfileModal from "./sections/ShareProfileModal";
+import { useProfile } from "@/hooks/useProfile";
 
 const ONBOARDING_STEPS = [
   "Create your profile",
@@ -26,10 +27,11 @@ const PROFILE_LINK = "https://weana.co/profiles/dash";
 
 export default function IndividualAdminDashboardPage() {
   const router = useRouter();
+  const { profile, loading } = useProfile();
   const [stepStartIndex, setStepStartIndex] = useState(0);
   const [isMobileAppModalOpen, setIsMobileAppModalOpen] = useState(false);
   const [isShareProfileModalOpen, setIsShareProfileModalOpen] = useState(false);
-
+  const [profileData, setProfileData] = useState<any>(null);
   const maxStepStart = Math.max(ONBOARDING_STEPS.length - VISIBLE_STEP_CARDS, 0);
 
   const activeSteps = useMemo(
@@ -47,39 +49,11 @@ export default function IndividualAdminDashboardPage() {
     }
   };
   useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}profile`,
-          {
-            credentials: "include",
-          }
-        );
-  
-        let data;
-        try {
-          data = await res.json();
-        } catch {
-          data = {};
-        }
-  
-        if (!res.ok) {
-          throw new Error(data.message || "Failed to fetch profile");
-        }
-  
-        // ✅ use profile data here
-        console.log("User:", data);
-  
-      } catch (err: any) {
-        console.error("Failed to fetch profile:", err);
-  
-        // redirect if not authenticated
-        router.push("/");
-      }
-    };
-  
-    fetchProfile();
-  }, [router]);
+    if (profile) {
+      console.log("User:", profile);
+      setProfileData(profile);
+    }
+  }, [profile]);
   return (
     <Box
       sx={{
