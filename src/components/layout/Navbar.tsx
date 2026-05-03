@@ -138,13 +138,36 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
               }}
               sx={{
                 cursor: "pointer",
+                position: "relative",
                 fontSize: 13.5,
-                color: isHome ? "#F7F7F7" : "#1E1E1E",
+                color: isHome ? "#e0e0e0" : "#1E1E1E",
                 fontWeight: 500,
                 textDecoration: "none",
                 textTransform: "capitalize",
-                transition: "transform 320ms ease, color 320ms ease",
-                "&:hover": { color: C.navy, transform: "translateY(-2px)" },
+                letterSpacing: "0.01em",
+                pb: "3px",
+                transition: "color 280ms ease",
+
+                "&::after": {
+                  content: '""',
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "1.5px",
+                  borderRadius: "2px",
+                  backgroundColor: isHome ? "#A89FFF" : C.purple,
+                  transform: "scaleX(0)",
+                  transformOrigin: "left center",
+                  transition: "transform 320ms cubic-bezier(0.4, 0, 0.2, 1)",
+                },
+
+                "&:hover": {
+                  color: isHome ? "#A89FFF" : C.purple,
+                  "&::after": {
+                    transform: "scaleX(1)",
+                  },
+                },
               }}
             >
               Login
