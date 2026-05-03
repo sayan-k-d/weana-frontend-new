@@ -121,8 +121,6 @@ function CallbackPageContent() {
         if (!res.ok) {
           throw new Error(data.message || "Login failed");
         }
-        console.log("Login successful, response:", data);
-        return;
         setStatus("Success! Redirecting...");
         if(decodedState?.flow === "admin-login"){
           router.push("/weana-admin-dashboard");
