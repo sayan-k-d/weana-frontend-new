@@ -345,6 +345,26 @@ export default function Signup() {
     setAccountType("");
   };
 
+  const handleGoogleSignup = async () => {
+    const base = `${process.env.NEXT_PUBLIC_KEYCLOAK_URL}/realms/${process.env.NEXT_PUBLIC_KEYCLOAK_REALM}/protocol/openid-connect/auth`;
+    const state = btoa(JSON.stringify({
+        provider: "google",
+        flow: "signup",
+        type:'team'
+    }));
+
+    const params = new URLSearchParams({
+        client_id: process.env.NEXT_PUBLIC_KEYCLOAK_BACKEND_CLIENT_ID!,
+        redirect_uri: process.env.NEXT_PUBLIC_KEYCLOAK_REDIRECT_URI!,
+        response_type: "code",
+        scope: "openid",
+        kc_idp_hint: "google",
+        state,
+    });
+
+    const url = `${base}?${params.toString()}`;
+    window.location.href = url;
+};
   return (
     <PageWrapper>
       {accountType === "" ? (
@@ -827,6 +847,41 @@ export default function Signup() {
                   width={50}
                   height={50}
                 />
+              </Stack>
+
+              {/* Sign Up button */}
+              <SignUpButton fullWidth onClick={handleSignUp} disabled={loading}>
+                {loading
+                  ? <CircularProgress size={20} sx={{ color: '#fff' }} />
+                  : 'Sign Up'
+                }
+              </SignUpButton>
+
+              {/* OR divider */}
+              <Divider sx={{ my: 2.5, '&::before, &::after': { borderColor: '#E0DFF0' } }}>
+                <Typography sx={{ fontSize: 12, color: '#BBBBCC', px: 1, fontWeight: 500 }}>OR</Typography>
+              </Divider>
+
+              {/* Social buttons */}
+              <Stack spacing={1.2}>
+                <SocialButton fullWidth startIcon={<GoogleIcon />} onClick={handleGoogleSignup}>
+                  Continue with Google
+                </SocialButton>
+                <SocialButton fullWidth startIcon={<MicrosoftIcon />}>
+                  Continue with Microsoft
+                </SocialButton>
+                <SocialButton
+                  fullWidth
+                  startIcon={<LockOutlinedIcon sx={{ fontSize: 17, color: '#888' }} />}
+                >
+                  Continue with SSO
+                </SocialButton>
+                <SocialButton
+                  fullWidth
+                  startIcon={<AppleIcon sx={{ fontSize: 18, color: '#1A1A3E' }} />}
+                >
+                  Continue with Apple
+                </SocialButton>
               </Stack>
             </Stack>
           </Box>

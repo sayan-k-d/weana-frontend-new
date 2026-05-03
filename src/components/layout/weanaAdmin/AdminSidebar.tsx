@@ -161,7 +161,15 @@ export function AdminSidebar() {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [loadingPath, setLoadingPath] = useState<string | null>(null);
+  const openCMS = async () => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}wordpress-sso`, {
+      credentials: "include",
+    });
 
+    const data = await res.json();
+
+    window.location.href = data.redirectUrl;
+  };
   const isActive = (path: string) =>
     pathname === path || (path.length > 1 && pathname.startsWith(`${path}/`));
 
@@ -258,7 +266,13 @@ export function AdminSidebar() {
               label={item.label}
               isActive={isActive(item.path)}
               collapsed={collapsed}
-              onClick={() => handleNavClick(item.path)}
+              onClick={() => {
+                if (item.path == "/admin/cms") {
+                  openCMS();
+                  return;
+                }
+                router.push(item.path);
+              }}
             />
             {item.dividerAfter && (
               <Divider sx={{ my: 1, borderColor: ADMIN_COLORS.cardBorder }} />
@@ -266,7 +280,6 @@ export function AdminSidebar() {
           </Box>
         ))}
       </Box>
-
 
       {/* ── Utility links (Help Center + Settings) ── */}
       <Box sx={{ flexShrink: 0 }}>

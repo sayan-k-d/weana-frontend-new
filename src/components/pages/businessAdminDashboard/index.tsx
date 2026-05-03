@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 
@@ -12,11 +12,46 @@ import RecommendationsCard from "./sections/dashboard/RecommendationsCard";
 import RecentLeadsCard from "./sections/dashboard/LeadsSection";
 import { ExpertCard, FeatureExplorer } from "./sections/dashboard/FeaturesSection";
 import { useWelcomeDialog } from "@/hooks/useWelcomeDialog";
+import { useRouter } from "next/navigation";
 
 export default function BusinessAdminDashboard() {
   const { isOpen: isWelcomeOpen, close: closeWelcome } = useWelcomeDialog(true);
   const [showBanner, setShowBanner] = useState(true);
-
+  const router = useRouter();
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}profile`,
+          {
+            credentials: "include",
+          }
+        );
+  
+        let data;
+        try {
+          data = await res.json();
+        } catch {
+          data = {};
+        }
+  
+        if (!res.ok) {
+          throw new Error(data.message || "Failed to fetch profile");
+        }
+  
+        // ✅ use profile data here
+        console.log("User:", data);
+  
+      } catch (err: any) {
+        console.error("Failed to fetch profile:", err);
+  
+        // redirect if not authenticated
+        router.push("/");
+      }
+    };
+  
+    fetchProfile();
+  }, [router]);
   return (
     <Box
       sx={{
