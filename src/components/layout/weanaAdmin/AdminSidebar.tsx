@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { cmsAdminLogin } from "@/services/cmsService";
 import { Box, Divider, Stack, Tooltip, Typography } from "@mui/material";
 import KeyboardDoubleArrowLeftRoundedIcon from "@mui/icons-material/KeyboardDoubleArrowLeftRounded";
 import KeyboardDoubleArrowRightRoundedIcon from "@mui/icons-material/KeyboardDoubleArrowRightRounded";
@@ -159,19 +160,39 @@ export function AdminSidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const [loadingPath, setLoadingPath] = useState<string | null>(null);
   const openCMS = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}wordpress-sso`,{credentials: "include"});
-  
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}wordpress-sso`, {
+      credentials: "include",
+    });
+
     const data = await res.json();
-  
+
     window.location.href = data.redirectUrl;
   };
-  /**
-   * A path is active if the current pathname matches it exactly
-   * OR if the pathname starts with it followed by a "/" (nested routes).
-   */
   const isActive = (path: string) =>
     pathname === path || (path.length > 1 && pathname.startsWith(`${path}/`));
+
+  const handleNavClick = async (path: string) => {
+    if (path === "/admin/cms" || path === "/admin/shop") {
+      if (loadingPath) return;
+      setLoadingPath(path);
+      try {
+        const { success, redirect } = await cmsAdminLogin();
+        if (success) {
+          const url =
+            path === "/admin/shop"
+              ? `${redirect}edit.php?post_type=product`
+              : redirect;
+          window.open(url, "_blank");
+        }
+      } finally {
+        setLoadingPath(null);
+      }
+      return;
+    }
+    router.push(path);
+  };
 
   return (
     <Box
@@ -246,11 +267,11 @@ export function AdminSidebar() {
               isActive={isActive(item.path)}
               collapsed={collapsed}
               onClick={() => {
-                if(item.path == "/admin/cms"){
-                  openCMS()
+                if (item.path == "/admin/cms") {
+                  openCMS();
                   return;
                 }
-                router.push(item.path)
+                router.push(item.path);
               }}
             />
             {item.dividerAfter && (

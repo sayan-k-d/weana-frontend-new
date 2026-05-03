@@ -17,6 +17,7 @@
     "@mui/material-nextjs": "^9.0.0",
     "@reduxjs/toolkit": "^2.11.2",
     "@tanstack/react-table": "^8.21.3",
+    "axios": "^1.15.2",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.20",
     "next": "16.2.4",
