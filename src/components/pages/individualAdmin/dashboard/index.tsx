@@ -3,7 +3,7 @@
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import NorthEastRoundedIcon from "@mui/icons-material/NorthEastRounded";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import MobileAppModal from "./sections/MobileAppModal";
 import OnboardingCard from "./sections/OnboardingCard";
@@ -46,7 +46,40 @@ export default function IndividualAdminDashboardPage() {
       setIsMobileAppModalOpen(true);
     }
   };
-
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}profile`,
+          {
+            credentials: "include",
+          }
+        );
+  
+        let data;
+        try {
+          data = await res.json();
+        } catch {
+          data = {};
+        }
+  
+        if (!res.ok) {
+          throw new Error(data.message || "Failed to fetch profile");
+        }
+  
+        // ✅ use profile data here
+        console.log("User:", data);
+  
+      } catch (err: any) {
+        console.error("Failed to fetch profile:", err);
+  
+        // redirect if not authenticated
+        router.push("/");
+      }
+    };
+  
+    fetchProfile();
+  }, [router]);
   return (
     <Box
       sx={{
