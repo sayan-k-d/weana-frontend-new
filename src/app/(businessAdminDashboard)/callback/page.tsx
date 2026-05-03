@@ -115,12 +115,12 @@ function CallbackPageContent() {
           credentials: "include",
           body: JSON.stringify({ code, signup_session_id }),
         });
-
+        const data = await res.json();
         if (!res.ok) {
-          const data = await res.json();
           throw new Error(data.message || "Login failed");
         }
-
+        console.log("Login successful, response:", data);
+        return;
         setStatus("Success! Redirecting...");
         if(decodedState?.flow === "admin-login"){
           router.push("/weana-admin-dashboard");
