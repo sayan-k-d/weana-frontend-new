@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { cmsAdminLogin } from "@/services/cmsService";
 import { Box, Divider, Stack, Tooltip, Typography } from "@mui/material";
 import KeyboardDoubleArrowLeftRoundedIcon from "@mui/icons-material/KeyboardDoubleArrowLeftRounded";
 import KeyboardDoubleArrowRightRoundedIcon from "@mui/icons-material/KeyboardDoubleArrowRightRounded";
@@ -159,13 +160,31 @@ export function AdminSidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const [loadingPath, setLoadingPath] = useState<string | null>(null);
 
-  /**
-   * A path is active if the current pathname matches it exactly
-   * OR if the pathname starts with it followed by a "/" (nested routes).
-   */
   const isActive = (path: string) =>
     pathname === path || (path.length > 1 && pathname.startsWith(`${path}/`));
+
+  const handleNavClick = async (path: string) => {
+    if (path === "/admin/cms" || path === "/admin/shop") {
+      if (loadingPath) return;
+      setLoadingPath(path);
+      try {
+        const { success, redirect } = await cmsAdminLogin();
+        if (success) {
+          const url =
+            path === "/admin/shop"
+              ? `${redirect}edit.php?post_type=product`
+              : redirect;
+          window.open(url, "_blank");
+        }
+      } finally {
+        setLoadingPath(null);
+      }
+      return;
+    }
+    router.push(path);
+  };
 
   return (
     <Box
@@ -239,7 +258,7 @@ export function AdminSidebar() {
               label={item.label}
               isActive={isActive(item.path)}
               collapsed={collapsed}
-              onClick={() => router.push(item.path)}
+              onClick={() => handleNavClick(item.path)}
             />
             {item.dividerAfter && (
               <Divider sx={{ my: 1, borderColor: ADMIN_COLORS.cardBorder }} />
@@ -247,6 +266,7 @@ export function AdminSidebar() {
           </Box>
         ))}
       </Box>
+
 
       {/* ── Utility links (Help Center + Settings) ── */}
       <Box sx={{ flexShrink: 0 }}>

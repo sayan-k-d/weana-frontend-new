@@ -9,7 +9,7 @@ export function proxy(request: NextRequest) {
     request.cookies.get("__Secure-next-auth.session-token")?.value;
 
   const isAuthPage = pathname === "/login" || pathname === "/signup";
-  const isDashboard = pathname.startsWith("/dashboard");
+  const isDashboard = pathname.startsWith("/business-admin-dashboard");
   const isPublicCard = pathname.startsWith("/c/");
   const isRoot = pathname === "/";
 
@@ -26,7 +26,9 @@ export function proxy(request: NextRequest) {
 
   // Already logged in → block auth pages
   if (isAuthPage && token) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return NextResponse.redirect(
+      new URL("/business-admin-dashboard", request.url),
+    );
   }
 
   return NextResponse.next();

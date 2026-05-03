@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
+import { generateToken, getStoredToken } from "@/services/tokenService";
 import { StatCardsRow } from "./sections/dashboard/Statcardsrow";
 import { UserGrowthChart } from "./sections/dashboard/UserGrowthChart";
 import { AccessoriesTable } from "./sections/dashboard/AccessoriesTable";
@@ -31,6 +33,12 @@ function DashboardHeader() {
 }
 
 export default function AdminDashboardPage() {
+  useEffect(() => {
+    if (!getStoredToken()) {
+      generateToken().catch(console.error);
+    }
+  }, []);
+
   return (
     <Box
       sx={{
