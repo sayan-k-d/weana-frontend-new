@@ -30,6 +30,7 @@ export function useProfile() {
         setProfile(data);
       } catch (err) {
         console.error("Failed to fetch profile:", err);
+        alert("Failed to fetch profile. Please log in again.");
         router.push("/");
       } finally {
         setLoading(false);

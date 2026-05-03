@@ -59,10 +59,10 @@ const navItems: Item[] = [
   },
 ];
 
-export default function IndividualSidebar() {
+export default function IndividualSidebar({profileData}:any) {
   const router = useRouter();
   const pathname = usePathname();
-
+  console.log("profileData in sidebar:", profileData?.user);
   return (
     <Box
       sx={{
@@ -200,7 +200,7 @@ export default function IndividualSidebar() {
             </Box>
             <Box>
               <Typography sx={{ fontSize: 12.5, color: "#292336", fontWeight: 600 }}>
-                John Smith
+                {profileData?.user?.name || "John Doe"}
               </Typography>
               <Typography sx={{ fontSize: 10.5, color: "#8A849A", fontWeight: 500 }}>
                 Admin
