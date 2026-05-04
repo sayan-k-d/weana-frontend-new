@@ -27,11 +27,9 @@ const PROFILE_LINK = "https://weana.co/profiles/dash";
 
 export default function IndividualAdminDashboardPage() {
   const router = useRouter();
-  const { profile, loading } = useProfile();
   const [stepStartIndex, setStepStartIndex] = useState(0);
   const [isMobileAppModalOpen, setIsMobileAppModalOpen] = useState(false);
   const [isShareProfileModalOpen, setIsShareProfileModalOpen] = useState(false);
-  const [profileData, setProfileData] = useState<any>(null);
   const maxStepStart = Math.max(ONBOARDING_STEPS.length - VISIBLE_STEP_CARDS, 0);
 
   const activeSteps = useMemo(
@@ -48,12 +46,7 @@ export default function IndividualAdminDashboardPage() {
       setIsMobileAppModalOpen(true);
     }
   };
-  useEffect(() => {
-    if (profile) {
-      console.log("User:", profile);
-      setProfileData(profile);
-    }
-  }, [profile]);
+
   return (
     <Box
       sx={{
