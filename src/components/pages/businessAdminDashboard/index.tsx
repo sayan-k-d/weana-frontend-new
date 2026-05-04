@@ -10,9 +10,13 @@ import TeamPerformanceCard from "./sections/dashboard/TeamPerformanceCard";
 import CampaignsCard from "./sections/dashboard/CampaignsCard";
 import RecommendationsCard from "./sections/dashboard/RecommendationsCard";
 import RecentLeadsCard from "./sections/dashboard/LeadsSection";
-import { ExpertCard, FeatureExplorer } from "./sections/dashboard/FeaturesSection";
+import {
+  ExpertCard,
+  FeatureExplorer,
+} from "./sections/dashboard/FeaturesSection";
 import { useWelcomeDialog } from "@/hooks/useWelcomeDialog";
 import { useRouter } from "next/navigation";
+import axiosInstance from "@/lib/axios";
 
 export default function BusinessAdminDashboard() {
   const { isOpen: isWelcomeOpen, close: closeWelcome } = useWelcomeDialog(true);
@@ -21,35 +25,14 @@ export default function BusinessAdminDashboard() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}profile`,
-          {
-            credentials: "include",
-          }
-        );
-  
-        let data;
-        try {
-          data = await res.json();
-        } catch {
-          data = {};
-        }
-  
-        if (!res.ok) {
-          throw new Error(data.message || "Failed to fetch profile");
-        }
-  
-        // ✅ use profile data here
+        const { data } = await axiosInstance.get("profile");
         console.log("User:", data);
-  
-      } catch (err: any) {
+      } catch (err) {
         console.error("Failed to fetch profile:", err);
-  
-        // redirect if not authenticated
-        router.push("/");
+        router.push("/business-admin-dashboard");
       }
     };
-  
+
     fetchProfile();
   }, [router]);
   return (
