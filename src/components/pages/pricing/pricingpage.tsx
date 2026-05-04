@@ -12,6 +12,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SocialProof from '../base-page/section/carousel';
+import Image from 'next/image';
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
 const C = {
@@ -27,22 +28,24 @@ const C = {
 const BillingToggle = styled(Box)({
     display: 'inline-flex',
     alignItems: 'center',
-    background: '#EEEDF8',
+    background: '#E7E7E7',
     borderRadius: 999,
-    padding: '4px',
+    padding: '20px',
     gap: 4,
+    height: "55px"
 });
 
 const ToggleBtn = styled(Button, {
     shouldForwardProp: (p) => p !== 'active',
 })<{ active?: boolean }>(({ active }) => ({
     borderRadius: 999,
-    padding: '6px 20px',
-    fontSize: 13,
+    padding: '12px',
+    fontSize: 16,
     fontWeight: 600,
     textTransform: 'none',
     background: active ? '#fff' : 'transparent',
-    color: active ? C.navy : C.muted,
+    // color: active ? C.navy : C.muted,
+    color: "#000",
     boxShadow: active ? '0 1px 4px rgba(0,0,0,0.08)' : 'none',
     minWidth: 0,
     '&:hover': { background: active ? '#fff' : 'rgba(255,255,255,0.5)' },
@@ -61,6 +64,7 @@ const plans = [
         cta: 'Get started for free',
         ctaVariant: 'outline' as const,
         color: C.purple,
+        background: "#EEEEEE",
         features: [
             '1 free digital business card',
             'Email signature generator',
@@ -77,6 +81,7 @@ const plans = [
         priceSub: '/month',
         desc: 'Networks with a branded card',
         cta: 'Sign up',
+        background: "linear-gradient(180deg, #E7E7E7 0%, #CADBFF 100%)",
         ctaVariant: 'filled' as const,
         color: C.purple,
         highlight: true,
@@ -98,6 +103,7 @@ const plans = [
         desc: 'Certify your brand name here',
         cta: 'View pricing',
         ctaVariant: 'outline' as const,
+        background: "linear-gradient(180deg, #E7E7E7 0%, #D6AFFF 100%)",
         color: '#E8453C',
         features: [
             'Cards for your whole team',
@@ -114,6 +120,7 @@ const plans = [
         desc: 'Unify your brand everywhere',
         cta: 'Contact Us',
         ctaVariant: 'outline' as const,
+        background: "linear-gradient(180deg, #E7E7E7 0%, #F9D1AF 100%)",
         color: C.navy,
         features: [
             'Unlimited digital business cards',
@@ -204,26 +211,29 @@ function PricingHero({ billing, setBilling }: { billing: 'monthly' | 'yearly'; s
             <Container maxWidth="lg">
                 {/* Breadcrumb */}
                 <Stack direction="row" spacing={1} sx={{ alignItems: "center", justifyContent: "center", mb: 3 }}>
-                    <Typography component={Link} href="/home" sx={{ fontSize: 12, color: C.muted, textDecoration: 'none', '&:hover': { color: C.purple } }}>Home</Typography>
+                    <Typography component={Link} href="/home" sx={{ display: "flex", alignItems: "center", fontSize: 12, color: C.muted, textDecoration: 'none', gap: "4px", '&:hover': { color: C.purple } }}>
+                        <Image src="/images/home_icon.png" alt="h" width={18} height={18} />
+                        Home
+                    </Typography>
                     <Typography sx={{ fontSize: 12, color: C.muted }}>›</Typography>
                     <Typography sx={{ fontSize: 12, color: C.purple, fontWeight: 600 }}>Pricing</Typography>
                 </Stack>
 
                 {/* Headline */}
-                <Typography sx={{ textAlign: 'center', fontSize: { xs: 28, md: 42 }, fontWeight: 900, color: C.navy, letterSpacing: -1, lineHeight: 1.2, mb: 1.5 }}>
+                <Typography sx={{ textAlign: 'center', fontSize: { xs: 28, md: 50 }, fontWeight: 900, color: "#120808", letterSpacing: -1, lineHeight: 1.2, mb: 1.5 }}>
                     Enhance your experience<br />with every plan.
                 </Typography>
-                <Typography sx={{ textAlign: 'center', fontSize: 14, color: C.muted, mb: 4 }}>
+                <Typography sx={{ textAlign: 'center', fontSize: 20, color: "#5A5251", mb: 4 }}>
                     Choose a plan today and evolve it as your business grows
                 </Typography>
 
                 {/* Monthly / Yearly toggle */}
                 <Box sx={{ display: 'flex', justifyContent: 'center', mb: 5 }}>
                     <BillingToggle>
-                        <ToggleBtn active={billing === 'monthly'} onClick={() => setBilling('monthly')}>Monthly</ToggleBtn>
-                        <ToggleBtn active={billing === 'yearly'} onClick={() => setBilling('yearly')}>
+                        <ToggleBtn active={billing === 'monthly'} onClick={() => setBilling('monthly')} style={{ padding: "4px 20px" }}>Monthly</ToggleBtn>
+                        <ToggleBtn active={billing === 'yearly'} onClick={() => setBilling('yearly')} style={{ padding: "4px 20px" }}>
                             Yearly
-                            <Chip label="Save 20%" size="small" sx={{ ml: 1, height: 18, fontSize: 9, fontWeight: 700, background: '#22C55E', color: '#fff', '& .MuiChip-label': { px: 1 } }} />
+                            <Chip label="-20%" size="small" sx={{ ml: 2, height: 18, fontSize: 9, fontWeight: 700, background: 'transparent', color: '#000', border: "1px solid #08AA44", '& .MuiChip-label': { px: 1 } }} />
                         </ToggleBtn>
                     </BillingToggle>
                 </Box>
@@ -241,33 +251,36 @@ function PricingCards({ billing }: { billing: 'monthly' | 'yearly' }) {
                     {plans.map((plan, i) => (
                         <Grid size={{ xs: 12, sm: 6, md: 3 }} key={plan.name}>
                             <Box sx={{
-                                border: plan.highlight ? `2px solid ${C.purple}` : `1px solid ${C.border}`,
-                                borderRadius: 4,
-                                p: 3,
+                                // border: plan.highlight ? `2px solid ${C.purple}` : `1px solid ${C.border}`,
+                                borderRadius: "12px",
+                                p: 1.5,
                                 height: '100%',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 background: plan.highlight ? '#FAFAFF' : '#fff',
                                 position: 'relative',
-                                boxShadow: plan.highlight ? '0 4px 24px rgba(123,94,167,0.12)' : 'none',
+                                boxShadow: "0px 4px 20px 0px #00000040",
+                                // boxShadow: plan.highlight ? '0 4px 24px rgba(123,94,167,0.12)' : 'none',
                             }}>
                                 {/* Badge */}
-                                <Stack direction="row" sx={{ justifyContent: "space-between", alignItems: "center", mb: 1.5 }}>
-                                    <Chip label={plan.name} size="small" sx={{ background: plan.color + '18', color: plan.color, fontWeight: 700, fontSize: 11, height: 22 }} />
-                                    <Typography sx={{ fontSize: 11, color: C.muted }}>{plan.badge}</Typography>
-                                </Stack>
-
-                                {/* Price */}
-                                {plan.priceLabel === 'Free' || plan.priceLabel === 'Custom' ? (
-                                    <Typography sx={{ fontSize: 32, fontWeight: 900, color: C.navy, letterSpacing: -0.5, mb: 0.5 }}>{plan.priceLabel}</Typography>
-                                ) : (
-                                    <Stack direction="row" sx={{ alignItems: "flex-end", mb: 0.5 }} spacing={0.5}>
-                                        <Typography sx={{ fontSize: 32, fontWeight: 900, color: C.navy, letterSpacing: -0.5, lineHeight: 1 }}>
-                                            {billing === 'yearly' && plan.price.yearly ? `$${plan.price.yearly}` : plan.priceLabel}
-                                        </Typography>
-                                        <Typography sx={{ fontSize: 12, color: C.muted, mb: 0.5 }}>{plan.priceSub}</Typography>
+                                <Box sx={{ background: plan.background, height: "120px", display:"flex", flexDirection:"column", justifyContent:"space-between", mb: 1.5, p: 1 }}>
+                                    <Stack direction="row" sx={{ justifyContent: "space-between", alignItems: "center" }}>
+                                        <Chip label={plan.name} size="small" sx={{ background: "#9759DB", color: "#fff", fontWeight: 700, fontSize: 11, borderRadius: "20px", }} />
+                                        <Typography sx={{ fontSize: 11, color: C.muted }}>{plan.badge}</Typography>
                                     </Stack>
-                                )}
+
+                                    {/* Price */}
+                                    {plan.priceLabel === 'Free' || plan.priceLabel === 'Custom' ? (
+                                        <Typography sx={{ fontSize: "35px", fontWeight: 500, color: "#000", letterSpacing: "2%" }}>{plan.priceLabel}</Typography>
+                                    ) : (
+                                        <Stack direction="row" sx={{ alignItems: "baseline", mb: 0.5, display:"flex" }} spacing={0.5}>
+                                            <Typography sx={{ fontSize: "35px", fontWeight: 500, color: "#000", letterSpacing: "2%" }}>
+                                                {billing === 'yearly' && plan.price.yearly ? `$${plan.price.yearly}` : plan.priceLabel}
+                                            </Typography>
+                                            <Typography sx={{ fontSize: "15px", fontWeight: 400, color: "#5A5251", letterSpacing: "0px" }}>{plan.priceSub}</Typography>
+                                        </Stack>
+                                    )}
+                                </Box>
 
                                 <Typography sx={{ fontSize: 12, color: C.muted, mb: 2.5, lineHeight: 1.5 }}>{plan.desc}</Typography>
 
