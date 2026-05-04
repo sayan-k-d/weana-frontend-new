@@ -161,15 +161,15 @@ export function AdminSidebar() {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [loadingPath, setLoadingPath] = useState<string | null>(null);
-  const openCMS = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}wordpress-sso`, {
-      credentials: "include",
-    });
+  // const openCMS = async () => {
+  //   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}wordpress-sso`, {
+  //     credentials: "include",
+  //   });
 
-    const data = await res.json();
+  //   const data = await res.json();
 
-    window.location.href = data.redirectUrl;
-  };
+  //   window.location.href = data.redirectUrl;
+  // };
   const isActive = (path: string) =>
     pathname === path || (path.length > 1 && pathname.startsWith(`${path}/`));
 
@@ -266,13 +266,7 @@ export function AdminSidebar() {
               label={item.label}
               isActive={isActive(item.path)}
               collapsed={collapsed}
-              onClick={() => {
-                if (item.path == "/admin/cms") {
-                  openCMS();
-                  return;
-                }
-                router.push(item.path);
-              }}
+              onClick={() => handleNavClick(item.path)}
             />
             {item.dividerAfter && (
               <Divider sx={{ my: 1, borderColor: ADMIN_COLORS.cardBorder }} />
