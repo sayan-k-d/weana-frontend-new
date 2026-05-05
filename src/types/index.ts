@@ -112,6 +112,52 @@ export interface AddMethod {
   icon?: React.ReactNode;
 }
 
+// ─── Member Profile — Shared Types ───────────────────────────────────────────
+
+export type CardLayout = "Portrait" | "Landscape" | "Square";
+
+export type SideMenuSection = "CONTENT" | "LEAD CAPTURE" | "SHARING";
+
+export type SideMenuItemId =
+  | "about"
+  | "links"
+  | "lead-capture-form"
+  | "follow-up-email"
+  | "qr-code"
+  | "virtual-background"
+  | "email-signature"
+  | "accessories";
+
+export interface SideMenuItem {
+  id: SideMenuItemId;
+  label: string;
+  section: SideMenuSection;
+  icon: React.ReactNode;
+}
+
+export interface ThemeColor {
+  value: string;
+  label: string;
+}
+
+export interface MemberProfileFormData {
+  cardName: string;
+  cardLayout: CardLayout;
+  profilePicture: File | null;
+  profilePictureUrl: string | null;
+  name: string;
+  email: string;
+  pronouns: string;
+  location: string;
+  jobTitle: string;
+  company: string;
+  bio: string;
+  cardTheme: string;
+  linkColor: string;
+  matchLinkIcons: boolean;
+  font: string;
+}
+
 // ─── Directory Screen Types ─────────────────────────────────────────────────────
 
 export interface Directory {
@@ -162,3 +208,29 @@ export type ToggleKey =
   | "jobTitle2"
   | "companyName2"
   | "profilePic";
+
+
+  export type FormState = {
+    type: string,
+    email: string;
+    password: string;
+  };
+  export type FormErrors = Partial<FormState>;
+  
+  export type RegisterPayload = {
+    type: string;
+    email: string;
+    password: string;
+  
+    name?: string;
+    job_title?: string;
+    company?: string;
+    additional_email?: string;
+    mobile?: string;
+  
+    recommended_links?: {
+      title: string;
+      value: string;
+      type: string;
+    }[];
+  };

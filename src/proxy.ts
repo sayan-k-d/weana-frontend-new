@@ -21,12 +21,14 @@ export function proxy(request: NextRequest) {
 
   // Protected dashboard
   if (isDashboard && !token) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   // Already logged in → block auth pages
   if (isAuthPage && token) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return NextResponse.redirect(
+      new URL("/dashboard", request.url),
+    );
   }
 
   return NextResponse.next();
