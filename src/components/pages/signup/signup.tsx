@@ -657,16 +657,16 @@ export default function Signup() {
             </Box>
 
             {/* Sign Up button */}
-            <SignUpButton fullWidth onClick={handleSignUp} disabled={loading}>
+            {/* <SignUpButton fullWidth onClick={handleSignUp} disabled={loading}>
               {loading ? (
                 <CircularProgress size={20} sx={{ color: "#fff" }} />
               ) : (
                 "Sign Up"
               )}
-            </SignUpButton>
+            </SignUpButton> */}
 
             {/* OR divider */}
-            <Divider
+            {/* <Divider
               sx={{
                 my: 2.5,
                 "&::before, &::after": { borderColor: "#E0DFF0" },
@@ -677,10 +677,10 @@ export default function Signup() {
               >
                 OR
               </Typography>
-            </Divider>
+            </Divider> */}
 
             {/* Social buttons */}
-            <Stack spacing={1.2}>
+            {/* <Stack spacing={1.2}>
               <SocialButton fullWidth startIcon={<GoogleIcon />}>
                 Continue with Google
               </SocialButton>
@@ -703,7 +703,7 @@ export default function Signup() {
               >
                 Continue with Apple
               </SocialButton>
-            </Stack>
+            </Stack> */}
 
             {/* Login link */}
             <Typography
@@ -850,20 +850,20 @@ export default function Signup() {
               </Stack>
 
               {/* Sign Up button */}
-              <SignUpButton fullWidth onClick={handleSignUp} disabled={loading}>
+              {/* <SignUpButton fullWidth onClick={handleSignUp} disabled={loading}>
                 {loading
                   ? <CircularProgress size={20} sx={{ color: '#fff' }} />
                   : 'Sign Up'
                 }
-              </SignUpButton>
+              </SignUpButton> */}
 
               {/* OR divider */}
-              <Divider sx={{ my: 2.5, '&::before, &::after': { borderColor: '#E0DFF0' } }}>
+              {/* <Divider sx={{ my: 2.5, '&::before, &::after': { borderColor: '#E0DFF0' } }}>
                 <Typography sx={{ fontSize: 12, color: '#BBBBCC', px: 1, fontWeight: 500 }}>OR</Typography>
-              </Divider>
+              </Divider> */}
 
               {/* Social buttons */}
-              <Stack spacing={1.2}>
+              {/* <Stack spacing={1.2}>
                 <SocialButton fullWidth startIcon={<GoogleIcon />} onClick={handleGoogleSignup}>
                   Continue with Google
                 </SocialButton>
@@ -882,7 +882,7 @@ export default function Signup() {
                 >
                   Continue with Apple
                 </SocialButton>
-              </Stack>
+              </Stack> */}
             </Stack>
           </Box>
         </RightPane>

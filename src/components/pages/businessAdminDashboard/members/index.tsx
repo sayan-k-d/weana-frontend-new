@@ -92,7 +92,7 @@ export default function MembersPage() {
         <PageActions
           view={view}
           onViewChange={handleViewChange}
-          routePath="/members/add-member"
+          routePath="/business-admin/members/add-member"
           buttonText="Add Members"
         />
       </Stack>
@@ -144,7 +144,7 @@ export default function MembersPage() {
           <Button
             variant="text"
             startIcon={<AddIcon sx={{ fontSize: 16 }} />}
-            onClick={() => router.push("/members/add-member")}
+            onClick={() => router.push("/business-admin/members/add-member")}
             sx={{
               color: "#6B7280",
               fontSize: 13.5,

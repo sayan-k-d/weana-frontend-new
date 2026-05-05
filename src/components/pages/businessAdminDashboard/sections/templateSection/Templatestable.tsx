@@ -56,17 +56,27 @@ function TemplateRow({
   return (
     <Box sx={TABLE_ROW_SX as object}>
       {/* ── Template Info: avatar + name ── */}
-      <Link
-        className="table-link"
-        href={`/templates/${template.id}`}
-        style={{ textDecoration: "none", color: "#000000" }}
-      >
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          {" "}
+      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+        <Link
+          className="table-link"
+          href={`/business-admin/templates/${template.id}`}
+          style={{ textDecoration: "none", color: "#000000" }}
+        >
           <TemplateAvatar name={template.name} avatarUrl={template.avatarUrl} />
+        </Link>
+        <Link
+          className="table-link"
+          href={`/business-admin/templates/${template.id}`}
+          style={{
+            textDecoration: "none",
+            color: "#000000",
+            padding: "0.5rem",
+            borderRadius:"10px"
+          }}
+        >
           <Typography sx={MEMBER_NAME_SX as object}>{template.name}</Typography>
-        </Box>
-      </Link>
+        </Link>
+      </Box>
 
       {/* Edit + Assign + Kebab — rendered as grid children via display:contents */}
       <TemplateRowActions

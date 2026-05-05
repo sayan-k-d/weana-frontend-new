@@ -70,7 +70,7 @@ export const columns = (
       return (
         <Link
           className="table-link"
-          href={`/teams/${t.id}`}
+          href={`/business-admin/teams/${t.id}`}
           style={{ textDecoration: "none", color: "#000000" }}
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>

@@ -29,12 +29,12 @@ export default function BusinessAdminDashboard() {
         console.log("User:", data);
       } catch (err) {
         console.error("Failed to fetch profile:", err);
-        router.push("/business-admin-dashboard");
+        router.push("/");
       }
     };
 
     fetchProfile();
-  }, [router]);
+  }, []);
   return (
     <Box
       sx={{

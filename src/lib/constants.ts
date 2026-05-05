@@ -30,7 +30,7 @@ export const NAV_SECTIONS: NavSection[] = [
   {
     title: "Home",
     icon: React.createElement(HomeOutlinedIcon, { sx: { fontSize: 18 } }),
-    path: "/business-admin-dashboard",
+    path: "/business-admin/dashboard",
     active: true,
   },
   {
@@ -39,32 +39,35 @@ export const NAV_SECTIONS: NavSection[] = [
       sx: { fontSize: 18 },
     }),
     items: [
-      { label: "Members", path: "/members" },
-      { label: "Directory", path: "/directory" },
-      { label: "Teams", path: "/teams" },
-      { label: "Templates", path: "/templates" },
+      { label: "Members", path: "/business-admin/members" },
+      { label: "Directory", path: "/business-admin/directory" },
+      { label: "Teams", path: "/business-admin/teams" },
+      { label: "Templates", path: "/business-admin/templates" },
     ],
   },
   {
     title: "Brand Assets",
     icon: React.createElement(InsightsOutlinedIcon, { sx: { fontSize: 18 } }),
     items: [
-      { label: "Email Signatures", path: "/email-signatures" },
-      { label: "Virtual Background", path: "/virtual-backgrounds" },
+      { label: "Email Signatures", path: "/business-admin/email-signatures" },
+      {
+        label: "Virtual Background",
+        path: "/business-admin/virtual-backgrounds",
+      },
     ],
   },
   {
     title: "Network",
     icon: React.createElement(PeopleAltOutlinedIcon, { sx: { fontSize: 18 } }),
     items: [
-      { label: "Contacts", path: "/contacts" },
-      { label: "Events", path: "/events" },
+      { label: "Contacts", path: "/business-admin/contacts" },
+      { label: "Events", path: "/business-admin/events" },
     ],
   },
   {
     title: "Insights",
     icon: React.createElement(InsightsOutlinedIcon, { sx: { fontSize: 18 } }),
-    items: [{ label: "Analytics", path: "/analytics" }],
+    items: [{ label: "Analytics", path: "/business-admin/analytics" }],
   },
   {
     title: "Accessories",
