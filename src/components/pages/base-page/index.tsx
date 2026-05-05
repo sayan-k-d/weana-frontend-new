@@ -499,6 +499,7 @@ function ChosenBy() {
   const activeIndex = cards.findIndex((card) => card.id === activeCardId);
   const canSwapRight = activeIndex >= 0 && activeIndex < cards.length - 1;
 
+
   return (
     <Box sx={{ background: "#fff", py: 15, overflow: "hidden" }}>
       <Container maxWidth="xl">
@@ -540,9 +541,11 @@ function ChosenBy() {
             const isHovered = activeCardId === card.id;
             const isRightNeighbor = canSwapRight && index === activeIndex + 1;
             const swapX = 174;
-            const baseTransform = `translate3d(0, ${card.translateY}, 0) rotate(${card.rotate}) scale(1)`;
-            const hoverTransform = `translate3d(${swapX}px, -9%, 0) rotate(0deg) scale(1.05)`;
+            // const baseTransform = `translate3d(0, ${card.translateY}, 0) rotate(${card.rotate}) scale(1)`;
+            // const hoverTransform = `translate3d(${swapX}px, -9%, 0) rotate(0deg) scale(1.05)`;
             const rightNeighborTransform = `translate3d(-${swapX}px, ${card.translateY}, 0) rotate(${card.rotate}) scale(1)`;
+            const baseTransform = `translate3d(0, ${card.translateY}, 0) rotate(${card.rotate}) scale(1)`;
+            const hoverTransform = `translate3d(0, -12%, 0) rotate(0deg) scale(1.08)`;
 
             return (
               <Box

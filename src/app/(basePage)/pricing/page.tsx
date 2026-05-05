@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function Pricing() {
   return (
     <>
-      <Navbar />
+      <Navbar isHome={true} />
       <PricingPage />
       <Footer />
     </>

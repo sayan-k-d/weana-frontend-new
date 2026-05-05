@@ -91,7 +91,7 @@ export default function Navbar({ isHome = false }: { isHome?: boolean }) {
                   position: "relative",
                   fontSize: 13.5,
                   color: isHome ? "#e0e0e0" : "#1E1E1E",
-                  fontWeight: 500,
+                  fontWeight: "bold",
                   textDecoration: "none",
                   textTransform: "capitalize",
                   letterSpacing: "0.01em",
