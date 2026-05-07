@@ -1,23 +1,45 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useMemo, useState } from 'react';
 import { Box, Button, Container, Grid, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import Footer from '@/components/layout/Footer';
 import MarketingHeader from '@/components/layout/MarketingHeader';
-
-const products = [
-  { slug: 'standard-card', name: 'Standard Card', image: '/images/original_card.png', price: '$24', oldPrice: '$30' },
-  { slug: 'digital-card', name: 'Digital Card', image: '/images/dot_card.png', price: '$29', oldPrice: '$36' },
-  { slug: 'mass-card', name: 'Mass Card', image: '/images/premium_card.png', price: '$35', oldPrice: '$42' },
-  { slug: 'online-store', name: 'Online Store', image: '/images/step_1.png', price: '$24', oldPrice: '$30' },
-  { slug: 'card', name: 'Card', image: '/images/step_2.png', price: '$29', oldPrice: '$36' },
-  { slug: 'nighter-new-v4', name: 'Nighter New v4.0', image: '/images/step_3.png', price: '$35', oldPrice: '$42' },
-  { slug: 'starter-deck', name: 'Starter Deck', image: '/images/cardImage1.png', price: '$24', oldPrice: '$30' },
-  { slug: 'team-deck', name: 'Team Deck', image: '/images/cardImage2.png', price: '$29', oldPrice: '$36' },
-];
+import type { ProductItem } from '@/lib/products';
 
 export default function ProductPage() {
+  const [products, setProducts] = useState<ProductItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const response = await fetch('/api/products', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Failed to load products');
+        const data = (await response.json()) as ProductItem[];
+        setProducts(data);
+        setHasError(false);
+      } catch {
+        setHasError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    void loadProducts();
+  }, []);
+
+  const startingPrice = useMemo(() => {
+    if (!products.length) return '$24';
+    const values = products
+      .map((p) => Number(p.price.replace(/[^\d.]/g, '')))
+      .filter((v) => !Number.isNaN(v));
+    if (!values.length) return '$24';
+    return `$${Math.min(...values).toFixed(2)}`;
+  }, [products]);
+
   return (
     <Box sx={{ background: '#fff', minHeight: '100vh' }}>
       <MarketingHeader />
@@ -45,23 +67,40 @@ export default function ProductPage() {
         <Container maxWidth="xl">
           <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', mb: { xs: 2.2, md: 3 } }}>
             <Typography sx={{ fontSize: { xs: 28, md: 34 }, fontWeight: 800, color: '#131E32' }}>Shop</Typography>
-            <Typography sx={{ fontSize: 13, fontWeight: 600, color: '#7A8596' }}>From $24</Typography>
+            <Typography sx={{ fontSize: 13, fontWeight: 600, color: '#7A8596' }}>From {startingPrice}</Typography>
           </Stack>
+
+          {isLoading && (
+            <Typography sx={{ fontSize: 14, color: '#7A8596', mb: 2 }}>Loading products...</Typography>
+          )}
+
+          {hasError && (
+            <Typography sx={{ fontSize: 14, color: '#D14343', mb: 2 }}>
+              Could not load products right now. Please try again.
+            </Typography>
+          )}
 
           <Grid container spacing={2.2}>
             {products.map((product) => (
               <Grid key={product.name} size={{ xs: 12, sm: 6, md: 3 }}>
                 <Box sx={{ border: '1px solid #EEF1F6', borderRadius: 2.3, p: 1.4, height: '100%', display: 'flex', flexDirection: 'column', background: '#fff' }}>
                   <Box sx={{ borderRadius: 1.8, background: 'linear-gradient(145deg,#F7F8FB 0%, #ECEFF6 100%)', minHeight: 150, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1.4 }}>
-                    <Image src={product.image} alt={product.name} width={190} height={112} style={{ width: '70%', height: 'auto', objectFit: 'contain' }} />
+                    <Box
+                      component="img"
+                      src={product.image}
+                      alt={product.name}
+                      sx={{ width: '70%', maxWidth: 190, height: 'auto', objectFit: 'contain' }}
+                    />
                   </Box>
                   <Typography sx={{ fontSize: 14, fontWeight: 700, color: '#182437', mb: 0.4 }}>{product.name}</Typography>
                   <Typography sx={{ fontSize: 11.5, color: '#7C8799', lineHeight: 1.42, mb: 1.2 }}>
-                    NFC + QR enabled, built for modern professionals.
+                    {product.blurb}
                   </Typography>
                   <Stack direction="row" spacing={0.8} sx={{ alignItems: 'center', mb: 1.1 }}>
                     <Typography sx={{ fontSize: 14, fontWeight: 700, color: '#101B2D' }}>{product.price}</Typography>
-                    <Typography sx={{ fontSize: 12, color: '#A6AFC0', textDecoration: 'line-through' }}>{product.oldPrice}</Typography>
+                    {!!product.oldPrice && (
+                      <Typography sx={{ fontSize: 12, color: '#A6AFC0', textDecoration: 'line-through' }}>{product.oldPrice}</Typography>
+                    )}
                   </Stack>
                   <Button
                     component={Link}
@@ -74,6 +113,12 @@ export default function ProductPage() {
               </Grid>
             ))}
           </Grid>
+
+          {!isLoading && !products.length && !hasError && (
+            <Typography sx={{ fontSize: 14, color: '#7A8596', mt: 2 }}>
+              No products found.
+            </Typography>
+          )}
         </Container>
       </Box>
 
