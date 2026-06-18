@@ -12,6 +12,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.14.1",
+    "@hookform/resolvers": "^5.2.2",
     "@mui/icons-material": "^9.0.0",
     "@mui/material": "^9.0.0",
     "@mui/material-nextjs": "^9.0.0",
@@ -26,9 +27,11 @@
     "qrcode": "^1.5.4",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "react-hook-form": "^7.74.0",
     "react-redux": "^9.2.0",
-    "recharts": "^3.8.1",
-    "store": "^2.0.12"
+    "store": "^2.0.12",
+    "zod": "^4.4.1",
+    "recharts": "^3.8.1"
   },
   "devDependencies": {
     "@types/node": "^20",
